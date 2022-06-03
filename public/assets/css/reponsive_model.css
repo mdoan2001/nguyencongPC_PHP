@@ -1,0 +1,28 @@
+/* PC */
+
+@media (min-width: 1024px) {
+    .model__container {
+        width: 1000px;
+    }
+    .model__container--min {
+        width: 640px;
+    }
+}
+
+
+/* Tablet */
+
+@media (max-width: 1023px) and (min-width: 740px) {
+    .model__container {
+        width: 100%;
+    }
+}
+
+
+/* Mobile */
+
+@media(max-width: 739px) {
+    .model__container {
+        width: 100%;
+    }
+}

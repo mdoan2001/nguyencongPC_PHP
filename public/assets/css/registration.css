@@ -1,0 +1,78 @@
+.registration__container {}
+
+.registration__tittle {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.registration__form {
+    padding: 0 186px;
+    margin-top: 20px;
+    width: 1000px;
+}
+
+.registration__form-item {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.registration__form-label {
+    min-width: 138px;
+    max-width: 138px;
+    font-size: 1.4rem;
+}
+
+.registration__form-input {
+    padding: 8px 12px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #495057;
+    border: 1px solid #ced4da;
+    width: 100%;
+    border-radius: 4px;
+    outline: none;
+}
+
+.registration__form-input:focus {
+    border: 1px solid --primary-color;
+}
+
+.registration__form-radio {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.registration__form-radio-input {
+    margin: 0 3px;
+}
+
+.registration__form-select {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 400;
+    padding: 8px 12px;
+    outline: none;
+}
+
+.registration__form-option {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.registration__form--submit {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--white-color);
+    margin-top: 14px;
+    margin: 14px auto 0;
+}
+
+.registration__form--submit:hover {
+    cursor: pointer;
+}
