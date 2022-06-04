@@ -1,5 +1,6 @@
 <?php
 class Home extends Controller{
+    // NGUYEN MINH DOAN HIHI
 
     private $nsxModel;
     private $nsx = array();
