@@ -125,6 +125,7 @@ span.orange {
 
 .header__top-item {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .header__top-link {

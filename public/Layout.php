@@ -34,36 +34,36 @@
                     <div class="header__top-container">
                         <nav class="header__top-list">
                             <li class="header__top-item js-display-showroom">
-                                <a class="header__top-link " href="#">
+                                <div class="header__top-link " >
                                     <div class="header__top-link-item">
                                         <i class="header__top-link-icon fa-solid fa-location-dot"></i>
                                         <div class="header__top-link-text">Hệ thống showroom</div>
                                     </div>
-                                </a>
+                                </div>
                             </li>
                             <li class="header__top-item js-display-hotline">
-                                <a class="header__top-link header__top-link--discoloration" href="#">
+                                <div class="header__top-link header__top-link--discoloration" >
                                     <div class="header__top-link-item">
                                         <i class="header__top-link-icon fa-solid fa-headset"></i>
                                         <div class="header__top-link-text">Khách Cá Nhân</div>
                                     </div>
-                                </a>
+                                </div>
                             </li>
                             <li class="header__top-item js-display-company">
-                                <a class="header__top-link header__top-link--discoloration" href="#">
+                                <div class="header__top-link header__top-link--discoloration" >
                                     <div class="header__top-link-item">
                                         <i class="header__top-link-icon fa-solid fa-headset"></i>
                                         <div class="header__top-link-text">Khách Doanh Nghiệp</div>
                                     </div>
-                                </a>
+                                </div>
                             </li>
                             <li class="header__top-item">
-                                <a class="header__top-link " href="#">
+                                <div class="header__top-link " >
                                     <div class="header__top-link-item">
                                         <i class="header__top-link-icon fa-solid fa-newspaper"></i>
                                         <div class="header__top-link-text">Tin Công Nghệ</div>
                                     </div>
-                                </a>
+                                </div>
                             </li>
                         </nav>
                         <div class="header__top-account">
@@ -142,14 +142,14 @@
                             </div>
                         </div>
                         <div class="header__main-options">
-                            <a href="#" class="header__main-options-item" onclick="showInfoToast();">
+                            <div class="header__main-options-item" onclick="showInfoToast();">
                                 <i class="header__main-options-icon fa-solid fa-gift"></i>
                                 <p class="header__main-options-text">Khuyến mại</p>
-                            </a>
-                            <a href="#" class="header__main-options-item" onclick="showInfoToast();">
+                            </div>
+                            <div class="header__main-options-item" onclick="showInfoToast();">
                                 <i class="header__main-options-icon fa-solid fa-desktop"></i>
                                 <p class="header__main-options-text">Xây dựng cấu hình</p>
-                            </a>
+                            </div>
                             <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>
@@ -206,14 +206,14 @@
                             </div>
                         </div>
                         <div class="header__main-options">
-                            <a href="#" class="header__main-options-item" onclick="showInfoToast();">
+                            <div href="" class="header__main-options-item" onclick="showInfoToast();">
                                 <i class="header__main-options-icon fa-solid fa-gift"></i>
                                 <p class="header__main-options-text">Khuyến mại</p>
-                            </a>
-                            <a href="#" class="header__main-options-item" onclick="showInfoToast();">
+                            </div>
+                            <div  class="header__main-options-item" onclick="showInfoToast();">
                                 <i class="header__main-options-icon fa-solid fa-desktop"></i>
                                 <p class="header__main-options-text">Xây dựng cấu hình</p>
-                            </a>
+                            </div>
                             <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>

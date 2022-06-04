@@ -17,7 +17,7 @@ class KhachHang extends Controller{
         }
         
 
-        if( !empty($_SESSION["email"])){
+        if(!empty($_SESSION["email"])){
             //get loai tai khoan
             $modelUser = $this->model("UsersModel");
             $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
@@ -27,13 +27,12 @@ class KhachHang extends Controller{
 
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+            $sl = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
         }
         else{
             $this->soLuongSanPham = 0 ;
             $this->loaiTaiKhoan = 1;
-
         }
 
     }
@@ -46,11 +45,13 @@ class KhachHang extends Controller{
         while($item = mysqli_fetch_assoc($list)){
             array_push($users, $item);
         }
+        if($this->loaiTaiKhoan == 0 ){
             $this->view("admin", "Layout", [
                 "page"=>"KhachHang",
                 "nsx"=>$this->nsx,
                 "users"=>$users
             ]);
+        }
             
     }
     
@@ -84,10 +85,22 @@ class KhachHang extends Controller{
 
             $UsersModel = $this->model("UsersModel");
             $UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-            header('Location: http://localhost/nguyencongpc/KhachHang');
+            
+            if($this->loaiTaiKhoan == 0 ){
+                header('Location: http://localhost/nguyencongpc/KhachHang');
+            }
+            else{
+                header('Location: http://localhost/nguyencongpc/Home');
+            }
             
         }
-        header('Location: http://localhost/nguyencongpc/KhachHang');
+        
+        if($this->loaiTaiKhoan == 0 ){
+            header('Location: http://localhost/nguyencongpc/KhachHang');
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');
+        }
     }
     public function UpdateByEmail(){
         if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])

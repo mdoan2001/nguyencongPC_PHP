@@ -29,8 +29,8 @@ class SanPham extends Controller{
 
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+            $sl = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
         }
         else{
             $this->soLuongSanPham = 0 ;

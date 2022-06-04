@@ -21,8 +21,6 @@ class Home extends Controller{
             array_push($this->nsx, $item);
         }
 
-        
-
 
         if(!empty($_SESSION["email"])){
             //get loai tai khoan
@@ -34,8 +32,8 @@ class Home extends Controller{
 
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+            $sl = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
         }
         else{
             $this->soLuongSanPham = 0 ;
