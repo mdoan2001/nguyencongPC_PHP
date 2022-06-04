@@ -93,6 +93,7 @@
     font-size: 1.6rem;
     cursor: pointer;
     text-decoration: none;
+    color: #333;
 }
 
 .content__product-quantity-text {

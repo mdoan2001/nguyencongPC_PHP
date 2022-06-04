@@ -26,6 +26,10 @@ class SanPhamModel extends DB{
         $qr = "DELETE from `sanpham` WHERE `sanpham`.`id` = $id";
         return mysqli_query($this->con, $qr);
     }
+    public function GetGiaById($id){
+        $qr = "SELECT gia FROM sanpham WHERE id = '$id'";
+        return mysqli_query($this->con, $qr);
+    }
 }
 
 ?>

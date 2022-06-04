@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2022 at 06:43 PM
+-- Generation Time: Jun 04, 2022 at 11:00 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -31,8 +31,19 @@ CREATE TABLE `chitietdonhang` (
   `id` int(11) NOT NULL,
   `maDonHang` int(11) NOT NULL,
   `maSanPham` int(11) NOT NULL,
-  `soLuong` int(11) NOT NULL
+  `soLuong` int(11) NOT NULL,
+  `tongTien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `chitietdonhang`
+--
+
+INSERT INTO `chitietdonhang` (`id`, `maDonHang`, `maSanPham`, `soLuong`, `tongTien`) VALUES
+(2, 3, 2, 1, 12000000),
+(3, 4, 4, 3, 167970000),
+(4, 4, 12, 1, 23990000),
+(5, 4, 31, 2, 22980000);
 
 -- --------------------------------------------------------
 
@@ -102,7 +113,11 @@ INSERT INTO `chitietsanpham` (`id`, `CPU`, `VGA`, `RAM`, `dungLuong`, `trongLuon
 (48, 'Intel Core i7-11800H 2.3Ghz Up to 4.6Ghz-24MB', 'NVIDIA GeForce RTX 3050 with 4GB of dedicated GDDR6 VRAM', '8GB (2 Khe cắm / Hỗ trợ tối đa 32GB)', '512GB PCIe NVMe SSD ', '2Kg', 'Đen'),
 (49, 'Intel® Core™ i5-1135G7 (2.4Ghz/8MB cache)', 'Intel® Iris® Xe Graphics', '16 GB LPDDR4X onboard', '512GB PCIe NVMe SSD (nâng cấp tối đa 1TB SSD)', '2Kg', 'Trắng'),
 (50, 'i5-1035G7/1.20GHz/3.70GHz', 'ON board', '8GB DDR4 3200MHz', '256GB', '1.5Kg', 'Xám'),
-(51, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel GHU', '8GB DDR4 3200MHz', '256GB', '2Kg', 'Đen');
+(51, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel GHU', '8GB DDR4 3200MHz', '256GB', '2Kg', 'Đen'),
+(52, 'Intel Core i5-8250U (4 x 1.6GHz/6MB cache)', 'Intel UHD 620', '8GB DDR4', '256GB SSD (thêm 01 khe cắm SSD )', '1.5Kg', 'Bạc'),
+(53, 'Intel® Core™ i5-8250U', 'Intel® UHD Graphics 620', '8GB DDR4 2400MHz', '512GB SSD M.2', '1.52Kg', 'Xám'),
+(54, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel Graphics Technology', '8GB DDR4 3200MHz', 'M.2 2280NVMe SSD', '2Kg', 'Xám'),
+(55, 'Intel® Core™ i5-8250U', 'Intel® UHD Graphics 620', '8GB DDR4 2400MHz', '256GB SSD M.2', '1.2kg', 'Trắng');
 
 -- --------------------------------------------------------
 
@@ -113,9 +128,20 @@ INSERT INTO `chitietsanpham` (`id`, `CPU`, `VGA`, `RAM`, `dungLuong`, `trongLuon
 CREATE TABLE `donhang` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `maSanPham` int(11) NOT NULL,
-  `soLuong` int(11) NOT NULL
+  `ngayMua` date NOT NULL,
+  `hoTen` varchar(255) NOT NULL,
+  `SDT` varchar(15) NOT NULL,
+  `diaChi` varchar(255) NOT NULL,
+  `ghiChu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `donhang`
+--
+
+INSERT INTO `donhang` (`id`, `email`, `ngayMua`, `hoTen`, `SDT`, `diaChi`, `ghiChu`) VALUES
+(3, 'thuy@gmail.com', '2022-06-04', 'Nguyễn Thanh Thùy', '123456', 'Hưng Yên', '123'),
+(4, 'mdoan2001@gmail.com', '2022-06-04', 'Nguyễn Minh Đoàn', '0962662287', 'Hưng Yên', 'Giao hàng buổi tối');
 
 -- --------------------------------------------------------
 
@@ -124,11 +150,19 @@ CREATE TABLE `donhang` (
 --
 
 CREATE TABLE `giohang` (
-  `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `maSanPham` int(11) NOT NULL,
   `soLuong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `giohang`
+--
+
+INSERT INTO `giohang` (`email`, `maSanPham`, `soLuong`) VALUES
+('mdoan2001@gmail.com', 2, 3),
+('mdoan2001@gmail.com', 25, 2),
+('thuy@gmail.com', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -149,9 +183,9 @@ INSERT INTO `hangsanxuat` (`id`, `tenNSX`) VALUES
 (1, 'DELL'),
 (2, 'ASUS'),
 (3, 'HP'),
-(4, 'Lenovo'),
-(5, 'Apple'),
-(6, 'Acer'),
+(4, 'LENOVO'),
+(5, 'APPLE'),
+(6, 'ACER'),
 (9, 'LG');
 
 -- --------------------------------------------------------
@@ -217,7 +251,11 @@ INSERT INTO `khohang` (`id`, `soLuong`) VALUES
 (48, 33),
 (49, 31),
 (50, 9),
-(51, 11);
+(51, 11),
+(52, 21),
+(53, 5),
+(54, 15),
+(55, 4);
 
 -- --------------------------------------------------------
 
@@ -243,8 +281,7 @@ INSERT INTO `nhanvien` (`id`, `hoTen`, `email`, `diaChi`, `SDT`, `hinhAnh`, `gio
 (1, 'Nguyễn Bích Ngọc', 'ngoc@gmail.com', 'Thanh Xuân - Hà Nội', '1234567890', 'https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/26/ngo-ngang-voi-ve-dep-cua-hot-girl-anh-the-chua-tron-18-docx-1622043349706.jpeg', 1),
 (2, 'Trần Hoàng Anh', 'anh@gmail.com', 'Cầu Giấy - Hà Nội', '1234567981', 'https://image.vtc.vn/resize/th/upload/2021/04/07/ek6qycqxiaiyiun-11052098.jpg', 1),
 (3, 'Nguyễn Hoàng Đức', 'duc@gmail.com', 'Ba Đình - Hà Nội', '1237618738', 'https://toigingiuvedep.vn/wp-content/uploads/2021/07/mau-anh-the-dep-lam-the-can-cuoc.jpg', 0),
-(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0),
-(7, 'Nguyễn Minh Đoàn', 'mdoan2001@gmail.com', 'Văn Giang - Hưng Yên', '0962662287', 'https://nhathauxaydung24h.com/wp-content/uploads/2021/12/anh-meo-cute-ban-tim.jpg', 0);
+(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +349,11 @@ INSERT INTO `sanpham` (`id`, `tenSanPham`, `maNSX`, `hinhAnh`, `gia`) VALUES
 (48, 'Laptop Acer Nitro 5 Eagle AN515-57-74RD NH.QD8SV.001 (i7-11800H/8GB/512GB-SSD/15.6-FHD/RTX-3050-4GB/Win10/ 1 Yr)', 6, 'https://nguyencongpc.vn/media/product/20482-acer-nitro-5-eagle-an515-57-74rd-nh-qd8sv-001.jpg', 27690000),
 (49, 'Laptop Acer Swift 3 SF314-511-56G1 (i5-1135G7 | 16GBRAM | 512GBSSD | 14-FHD-IPS | Bạc | N20C12_NX.ABLSV.002)', 6, 'https://nguyencongpc.vn/media/product/20668-acer-swift-3-sf314-511-56g1.jpg', 20990000),
 (50, 'Laptop LG gram 14Z90N-V.AR52A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-256GB)', 9, 'https://nguyencongpc.vn/media/product/16752-laptop-lg-gram-14z90n-var52a5-14fhdi5-1035g7ram-8gbssd-256gb.jpg', 30000000),
-(51, 'Laptop LG gram 14ZD90N-V.AX53A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-256GB)', 9, 'https://nguyencongpc.vn/media/product/16750-laptop-lg-gram-14zd90n-v_ax53a5.jpg', 27500000);
+(51, 'Laptop LG gram 14ZD90N-V.AX53A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-256GB)', 9, 'https://nguyencongpc.vn/media/product/16750-laptop-lg-gram-14zd90n-v_ax53a5.jpg', 27500000),
+(52, 'Laptop LG Gram 14Z980-G AH52A5', 9, 'https://nguyencongpc.vn/media/product/8858-laptop-lg-gram-14z980-g-ah52a5-900x.jpg', 29190000),
+(53, 'Laptop LG Gram 15Z980-G AH55A5', 9, 'https://nguyencongpc.vn/media/product/8866-laptop-lg-gram-15z980-g-ah55a5-900x.jpg', 36200000),
+(54, 'Laptop LG gram 14ZD90N-V.AX55A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-512GB)', 9, 'https://nguyencongpc.vn/media/product/16751-laptop-lg-gram-14zd90n-v_ax55a5.jpg', 29000000),
+(55, 'Laptop LG Gram 14ZD980-G AX52A5', 9, 'https://nguyencongpc.vn/media/product/8846-laptop-lg-gram-14zd980-g-ax52a5-900x.jpg', 26490000);
 
 -- --------------------------------------------------------
 
@@ -335,7 +376,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `hoTen`, `matKhau`, `loaiTaiKhoan`, `diaChi`, `SDT`) VALUES
 ('admin@gmail.com', 'ADMIN', '$2y$10$15bxKG4Qimh7SaZRBO88ke9EM8jCOXOoor4OmMcdXkCYVvI/yWEiO', 0, 'Hà Nội', '113'),
-('mdoan2001@gmail.com', 'Nguyễn Minh Đoàn', '$2y$10$H6efCJF13yRxEcAbRek24ukCIrZ7GwDKhTDqVmZ9a3vcxfCmlbl4q', 1, 'Hưng Yên', '114');
+('mdoan2001@gmail.com', 'Nguyễn Minh Đoàn', '$2y$10$uKKRndnuz7Qmb4dAFEN8oOsVIxnl7NWpB1VNFtF6UJJ7BR4SioNka', 1, 'Văn Giang - Hưng Yên', '0962662287'),
+('thuy@gmail.com', 'Thanh Thuỳ', '$2y$10$mLBqLGFnoX/23fTsUQbpXexJc0.GmabRELChSbdEyhXMNozfyzaLK', 1, 'Hưng Yên', '123456789');
 
 --
 -- Indexes for dumped tables
@@ -346,7 +388,8 @@ INSERT INTO `users` (`email`, `hoTen`, `matKhau`, `loaiTaiKhoan`, `diaChi`, `SDT
 --
 ALTER TABLE `chitietdonhang`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `maDonHang` (`maDonHang`);
+  ADD KEY `maDonHang` (`maDonHang`),
+  ADD KEY `maSanPham` (`maSanPham`);
 
 --
 -- Indexes for table `chitietsanpham`
@@ -365,8 +408,7 @@ ALTER TABLE `donhang`
 -- Indexes for table `giohang`
 --
 ALTER TABLE `giohang`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `email` (`email`),
+  ADD PRIMARY KEY (`email`,`maSanPham`),
   ADD KEY `maSanPham` (`maSanPham`);
 
 --
@@ -408,25 +450,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `giohang`
---
-ALTER TABLE `giohang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hangsanxuat`
@@ -438,7 +474,7 @@ ALTER TABLE `hangsanxuat`
 -- AUTO_INCREMENT for table `khohang`
 --
 ALTER TABLE `khohang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
@@ -450,7 +486,7 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables
@@ -460,7 +496,8 @@ ALTER TABLE `sanpham`
 -- Constraints for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  ADD CONSTRAINT `chitietdonhang_ibfk_1` FOREIGN KEY (`maDonHang`) REFERENCES `donhang` (`id`);
+  ADD CONSTRAINT `chitietdonhang_ibfk_1` FOREIGN KEY (`maDonHang`) REFERENCES `donhang` (`id`),
+  ADD CONSTRAINT `chitietdonhang_ibfk_2` FOREIGN KEY (`maSanPham`) REFERENCES `sanpham` (`id`);
 
 --
 -- Constraints for table `chitietsanpham`
@@ -478,8 +515,8 @@ ALTER TABLE `donhang`
 -- Constraints for table `giohang`
 --
 ALTER TABLE `giohang`
-  ADD CONSTRAINT `giohang_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`),
-  ADD CONSTRAINT `giohang_ibfk_2` FOREIGN KEY (`maSanPham`) REFERENCES `sanpham` (`id`);
+  ADD CONSTRAINT `giohang_ibfk_1` FOREIGN KEY (`maSanPham`) REFERENCES `sanpham` (`id`),
+  ADD CONSTRAINT `giohang_ibfk_2` FOREIGN KEY (`email`) REFERENCES `users` (`email`);
 
 --
 -- Constraints for table `khohang`

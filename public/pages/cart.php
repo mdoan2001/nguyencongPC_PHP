@@ -56,7 +56,7 @@
 
 
         <!-- ĐẶT HÀNG -->
-        <form action="http://localhost/nguyencongpc/test" method="POST" class="content__order">
+        <form action="http://localhost/nguyencongpc/DonHang" method="POST" class="content__order">
             <input name="ngayMua" type="hidden" value="<?php echo  date("Y-m-d "); ?>">
             <div class="content__order-col">
                 <div class="content__order-tittle">THÔNG TIN NGƯỜI MUA</div>
@@ -74,7 +74,7 @@
                 <div class="content__order-item">
                     <label class="content__order-label">Email*</label>
                     <input type="email" class="content__order-input" value="<?php echo $_SESSION["email"] ?>" disabled>
-                    <input name="email" type="hidden" class="content__order-input" value="<?php echo $_SESSION["email"] ?>" disabled>
+                    <input name="email" type="hidden" class="content__order-input" value="<?php echo $_SESSION["email"] ?>">
                 </div>
 
                 <div class="content__order-item">

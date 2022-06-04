@@ -63,30 +63,43 @@ class GioHang extends Controller{
                 
     }
     public function themGioHang($maSanPham){
-        $num = $this->cartModel->checkMaSanPham($maSanPham);
-        if($num == 0){
+        $num1 = $this->cartModel->checkMaSanPham($maSanPham);
+        $num2 = $this->cartModel->checkEmail($_SESSION["email"]);
+        if(!($num1 == 0 && $num2 == 0)){
             $this->cartModel->Insert($_SESSION["email"], $maSanPham, 1);
             header('Location: http://localhost/nguyencongpc/GioHang');                        
         }
         else{
-            $this->cartModel->tangSoLuong($maSanPham);
+            $this->cartModel->tangSoLuong($_SESSION["email"],$maSanPham);
             header('Location: http://localhost/nguyencongpc/GioHang');                        
         }
+
     }
     public function tangSoLuong($maSanPham){
-        $this->cartModel->tangSoLuong($maSanPham);
+        $this->cartModel->tangSoLuong($_SESSION["email"],$maSanPham);
         header('Location: http://localhost/nguyencongpc/GioHang');                        
 
     }
     public function giamSoLuong($maSanPham){
-        $this->cartModel->giamSoLuong($maSanPham);
-        header('Location: http://localhost/nguyencongpc/GioHang');                        
+        //Kiểm tra số lượng có phải 0 
+        //Nếu là 0 thì xóa khỏi giỏ hàng
+        $soLuong = $this->cartModel->getSoLuongByMaSanPham($maSanPham);
+        $soLuong = mysqli_fetch_assoc($soLuong);
+        $soLuong = $soLuong["soLuong"];
+        if($soLuong >1){
+            $this->cartModel->giamSoLuong($_SESSION["email"],$maSanPham);
+            header('Location: http://localhost/nguyencongpc/GioHang'); 
+        }
+        else{
+            $this->Delete($maSanPham); 
+        }
+
+                               
 
     }
     public function Delete($maSanPham){
         $this->cartModel->Delete($maSanPham);
         header('Location: http://localhost/nguyencongpc/GioHang');   
-
     }
 }
 ?>

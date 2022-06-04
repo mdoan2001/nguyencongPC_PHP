@@ -110,7 +110,8 @@ class KhachHang extends Controller{
         $this->view("user", "Layout", [
             "page"=>"login",
             "nsx"=>$this->nsx,
-            "title"=>"Đăng nhập tài khoản"
+            "title"=>"Đăng nhập tài khoản",
+            "tongSl"=>$this->soLuongSanPham
         ]);
             
     }
@@ -118,7 +119,9 @@ class KhachHang extends Controller{
         $this->view("user", "Layout", [
             "page"=>"registration",
             "nsx"=>$this->nsx,
-            "title"=>"Đăng ký tài khoản thành viên"
+            "title"=>"Đăng ký tài khoản thành viên",
+            "tongSl"=>$this->soLuongSanPham
+
         ]);
     }
     public function Logout(){

@@ -4,10 +4,12 @@ class DonHang extends Controller{
     private $nsxModel;
     private $nsx = array();
     private $cartModel;
+    private $orderModel;
     private $soLuongSanPham;
     public function __construct()
     {
         $this->cartModel = $this->model("GioHangModel");
+        $this->orderModel = $this->model("DonHangModel");
         
         //Kiem tra dang nhap
         if($_SESSION["isLogin"]== 0){
@@ -36,10 +38,10 @@ class DonHang extends Controller{
         
     }
 
-    public function Show(){
+    public function Show(){    
         
+        // CART
         $cart = $this->cartModel->ShowbyEmail($_SESSION["email"]);
-
         $array = array();
         while($item = mysqli_fetch_assoc($cart)){
             array_push($array, $item);
@@ -49,17 +51,54 @@ class DonHang extends Controller{
         for($i=0; $i<count($array); $i++){
             $tongTien += $array[$i]["gia"] * $array[$i]["soLuong"];
         }
+
         
 
-        $this->view("user", "Layout",[
-            "page"=>"cart",
-            "nsx"=>$this->nsx,
-            "array"=>$array,
-            "tongSl"=>$this->soLuongSanPham,
-            "tongTien"=>$tongTien,
-            "title"=>"Thông tin giỏ hàng"
+        if(isset($_POST["ngayMua"]) && isset($_POST["hoTen"]) && isset($_POST["SDT"]) && isset($_POST["email"]) &&
+        isset($_POST["diaChi"]) && isset($_POST["ghiChu"])){
 
-        ]);
+            $ngayMua = $_POST["ngayMua"];
+            $hoTen = $_POST["hoTen"];
+            $SDT = $_POST["SDT"];
+            $email = $_POST["email"];
+            $diaChi = $_POST["diaChi"];
+            $ghiChu = $_POST["ghiChu"];
+
+            $chiTietDonHangModel = $this->model("ChiTietDonHangModel");
+
+            // Thêm đơn hàng
+            $this->orderModel->Insert($email, $hoTen, $SDT, $ngayMua, $diaChi, $ghiChu);
+
+            // Lấy ID đơn hàng
+            $order = $this->orderModel->GetLastID();
+            $lastID = mysqli_fetch_assoc($order);
+            $maDonHang = $lastID["id"];
+
+            // Thêm chi tiết đơn hàng
+            for($i=0; $i<count($array); $i++){
+                $maSanPham = $array[$i]["maSanPham"];
+                $soLuong = $array[$i]["soLuong"];
+                $gia = $array[$i]["gia"];
+                $tien = $gia * $soLuong;
+
+                $chiTietDonHangModel->Insert($maDonHang, $maSanPham, $soLuong, $tien);
+            }
+
+            $this->view("user", "Layout",[
+                "page"=>"order",
+                "nsx"=>$this->nsx,
+                "tongSl"=>$this->soLuongSanPham,
+                "tongTien"=>$tongTien,
+                "title"=>"Thông tin giỏ hàng",
+                "array"=>$array,
+                "data"=>$_POST,
+                "lastID"=>$lastID
+            ]);
+        }
+        
+        
+
+        
                 
     }
    
