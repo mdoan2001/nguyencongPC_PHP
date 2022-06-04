@@ -11,7 +11,7 @@ class Controller{
             require_once "./mvc/views/".$view.".php";
         }
         else
-            require_once "../nguyencongpc/public/".$view.".php";
+            require_once "./public/".$view.".php";
         }
     }
 ?>
