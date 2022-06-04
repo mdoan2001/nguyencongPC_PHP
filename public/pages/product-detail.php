@@ -107,7 +107,7 @@ $item = $data["array"];
                     <p class="content__main-offer-text">+ Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop</p>
                 </div>
                 <div class="content__main-buy">
-                    <a href="cart.html" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
+                    <a href="http://localhost/nguyencongpc/GioHang/themGioHang/<?php echo $item["id"]?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
                         <h1>ĐẶT MUA NGAY</h1>
                         <p>Giao hàng tận nơi nhanh chóng</p>
                     </a>

@@ -21,12 +21,13 @@
         </div>
 
         <!-- Danh sach san pham -->
+        <?php foreach($data["array"] as $key =>$value){?>
 
         <div class="content__product">
-            <img src="assets/img/product/1.jpg" alt="" class="content__product-img">
+            <img src="<?php echo $value["hinhAnh"]?>" alt="" class="content__product-img">
             <div class="content__product-des">
                 <div class="content__product-name">
-                    Laptop Dell Latitude 3410 (70216823) (i3-10110U/4GB/ 256GB SSD/ 14.0"HD/VGA on/Dos/ 1Yr )
+                    <?php echo $value["tenSanPham"]?>
                 </div>
                 <p class="content__product-text content__product-text--red">
                     Khuyến mại
@@ -39,46 +40,19 @@
                 <p class="content__product-text"> + Giảm 10% khi mua thêm RAM, HDD laptop </p>
                 <p class="content__product-text"> + Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop </p>
             </div>
-            <div class="content__product-price">11.490.000đ</div>
+            <div class="content__product-price"><?php echo number_format($value["gia"])?>đ</div>
             <div class="content__product-quantity">
-                <button class="content__product-btn">-</button>
-                <div class="content__product-quantity-text">1</div>
-                <button class="content__product-btn">+</button>
+                <a href="http://localhost/nguyencongpc/GioHang/giamSoLuong/<?php echo $value["maSanPham"]?>" class="content__product-btn">-</a>
+                <div class="content__product-quantity-text"><?php echo $value["soLuong"]?></div>
+                <a href="http://localhost/nguyencongpc/GioHang/tangSoLuong/<?php echo $value["maSanPham"]?>" class="content__product-btn">+</a>
             </div>
-            <div class="content__product-money">11.490.000đ</div>
+            <div class="content__product-money"><?php echo  number_format($value["gia"] * $value["soLuong"])?>đ</div>
             <div class="content__product-remove">
-                <i class="fa-solid fa-trash-can content__product-remove-icon"></i>
+                <a href="http://localhost/nguyencongpc/GioHang/Delete/<?php echo $value["maSanPham"]?>" class="fa-solid fa-trash-can content__product-remove-icon"></a>
             </div>
         </div>
 
-        <div class="content__product">
-            <img src="assets/img/product/10.jpg" alt="" class="content__product-img">
-            <div class="content__product-des">
-                <div class="content__product-name">
-                    Laptop Dell Latitude 3410 (70216823) (i3-10110U/4GB/ 256GB SSD/ 14.0"HD/VGA on/Dos/ 1Yr )
-                </div>
-                <p class="content__product-text content__product-text--red">
-                    Khuyến mại
-                </p>
-                <p class="content__product-text"> + Túi/Balo laptop trị giá : 390.000đ </p>
-                <p class="content__product-text"> + Chuột không dây trị giá: 150.000đ </p>
-                <p class="content__product-text"> + Bàn di chuột trị giá: 50.000đ </p>
-                <p class="content__product-text"> + Bộ vệ sinh Laptop trị giá: 40.000đ </p>
-                <p class="content__product-text"> + Vệ sinh bảo dưỡng Laptop miễn phí trọn đời trị giá: 1 triệu đồng </p>
-                <p class="content__product-text"> + Giảm 10% khi mua thêm RAM, HDD laptop </p>
-                <p class="content__product-text"> + Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop </p>
-            </div>
-            <div class="content__product-price">11.490.000đ</div>
-            <div class="content__product-quantity">
-                <button class="content__product-btn">-</button>
-                <div class="content__product-quantity-text">1</div>
-                <button class="content__product-btn">+</button>
-            </div>
-            <div class="content__product-money">11.490.000đ</div>
-            <div class="content__product-remove">
-                <i class="fa-solid fa-trash-can content__product-remove-icon"></i>
-            </div>
-        </div>
+        <?php  }?>
 
 
         <!-- ĐẶT HÀNG -->
@@ -146,11 +120,11 @@
                 <div class="content__order-tittle">TỔNG TIỀN</div>
                 <div class="content__order-money">
                     <div class="content__order-text">Tổng cộng</div>
-                    <div class="content__order-num">30.680.000</div>
+                    <div class="content__order-num"><?php echo number_format($data["tongTien"])?>đ</div>
                 </div>
                 <div class="content__order-money">
                     <div class="content__order-text content__order-text--bold">Thành tiền</div>
-                    <div class="content__order-num content__order-num--red">30.680.000</div>
+                    <div class="content__order-num content__order-num--red"><?php echo number_format($data["tongTien"])?>đ</div>
                 </div>
                 <div class="content__order-money">
                     <div class="content__order-text"></div>

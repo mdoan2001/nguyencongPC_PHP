@@ -38,6 +38,7 @@ class Home extends Controller{
                 "page"=>"Home",
                 "array"=>$arr1,
                 "nsx"=>$this->nsx,
+                "title"=>"Máy tính Nguyễn Công"
             ]);
         }
         else{
@@ -49,48 +50,6 @@ class Home extends Controller{
         }
                 
     }
-
-    public function ChiTietSanPham($id){
-        $ct = $this->model("ChiTietSanPhamModel");
-
-        $data = $ct->ChiTietSanPham($id);
-        $des = mysqli_fetch_assoc($data);
-
-        $this->view("Layout", [
-            "page"=>"ChiTietSanPham",
-            "des"=>$des,
-            "nsx"=>$this->nsx
-        ]);
-    }
-
     
-
-    public function ShowByNSX($id){
-        $sp = $this->model("SanPhamModel");
-        $arrsp =[];
-        $listSP = $sp->GetListByNSX($id);
-        while($item = mysqli_fetch_assoc($listSP)){
-            array_push($arrsp, $item);
-        }
-
-        if($_SESSION["loaiTaiKhoan"] == 1){             
-            $this->view("user", "Layout", [
-                "page"=>"Home",
-                "array"=>$arrsp,
-                "nsx"=>$this->nsx
-            ]);
-        }
-        else{
-            $this->view("admin", "Layout", [
-                "page"=>"SanPham",
-                "array"=>$arrsp,
-                "nsx"=>$this->nsx
-            ]);
-        }
-        
-    }
-
-
-
 }
 ?>

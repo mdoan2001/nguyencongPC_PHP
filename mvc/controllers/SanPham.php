@@ -56,7 +56,8 @@ class SanPham extends Controller{
             $this->view("user","Layout", [
                 "page"=>"product-detail",
                 "array"=>$des,
-                "nsx"=>$this->nsx
+                "nsx"=>$this->nsx,
+                "title"=>"Chi tiết sản phẩm"
             ]);
         }
     }
@@ -83,7 +84,8 @@ class SanPham extends Controller{
             $this->view("user", "Layout", [
                 "page"=>"ListSanPham",
                 "array"=>$arrsp,
-                "nsx"=>$this->nsx
+                "nsx"=>$this->nsx,
+                "title"=>"Danh sách sản phẩm"
             ]);
         }
         

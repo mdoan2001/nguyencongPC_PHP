@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="./public/assets/css/reponsive_model.css">
     <link rel="stylesheet" href="./public/toast messages/toast-mess.css">
-    <title><?php echo $data["page"]; ?></title>
+    <title><?php echo $data["title"]; ?></title>
     
 </head>
 
@@ -150,11 +150,11 @@
                                 <i class="header__main-options-icon fa-solid fa-desktop"></i>
                                 <p class="header__main-options-text">Xây dựng cấu hình</p>
                             </a>
-                            <a href="cart.html" class="header__main-options-item header__cart">
+                            <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>
                                 <span class="header__cart-count">
-                                    0
+                                    <?php echo $data["tongSl"]?>                               
                                 </span>
                             </a>
 
@@ -178,7 +178,7 @@
                                         for($i=0; $i<count($data["nsx"]); $i++){
                                             echo '
                                                 <li class="navbar__item">
-                                                    <a href="#" class="navbar__link">
+                                                    <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$data["nsx"][$i]["id"].'" class="navbar__link">
                                                         <i class="navbar__icon fa-solid fa-laptop"></i>
                                                         <p class="navbar__name">LAPTOP - '.$data["nsx"][$i]["tenNSX"].'</p>
                                                     </a>
@@ -214,11 +214,11 @@
                                 <i class="header__main-options-icon fa-solid fa-desktop"></i>
                                 <p class="header__main-options-text">Xây dựng cấu hình</p>
                             </a>
-                            <a href="cart.html" class="header__main-options-item header__cart">
+                            <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>
                                 <span class="header__cart-count">
-                                    0
+                                    <?php echo $data["tongSl"]?>
                                 </span>
                             </a>
                         </div>

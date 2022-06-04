@@ -96,20 +96,23 @@ class KhachHang extends Controller{
 
         $this->view("user", "Layout", [
             "page"=>"login",
-            "nsx"=>$this->nsx
+            "nsx"=>$this->nsx,
+            "title"=>"Đăng nhập tài khoản"
         ]);
             
     }
     public function registration(){
         $this->view("user", "Layout", [
             "page"=>"registration",
-            "nsx"=>$this->nsx
+            "nsx"=>$this->nsx,
+            "title"=>"Đăng ký tài khoản thành viên"
         ]);
     }
     public function Logout(){
         $_SESSION["isLogin"] = 0;
         $_SESSION["loaiTaiKhoan"] = 1;
         $_SESSION["email"] = "";
+        $_SESSION["hoTen"] = "";
         header('Location: http://localhost/nguyencongpc/Home');
 
     }

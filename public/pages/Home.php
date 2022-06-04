@@ -101,7 +101,7 @@
                         for($i=0; $i<count($data["array"]["DELL"]); $i++){      
                             $item = $data["array"]["DELL"][$i];           
                         ?>
-                            <a href="product-detail.html" class="content__product-item">
+                            <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php echo $item["id"]?>" class="content__product-item">
                                 <img src="<?php echo $item["hinhAnh"]?>" alt="" class="content__product-img">
                                 <div class="content__product-save">
                                     Tiết kiệm <span><?php echo number_format($item["gia"]*0.1);?>đ</span>
