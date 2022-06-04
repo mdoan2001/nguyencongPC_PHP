@@ -24,6 +24,10 @@ class UsersModel extends DB{
         $qr = "DELETE FROM `users` WHERE `users`.`email` = '$email'";
         return mysqli_query($this->con, $qr);
     }
+    public function GetLoaiTaiKhoan($email){
+        $qr = "SELECT loaiTaiKhoan FROM users WHERE email = '$email'";
+        return mysqli_query($this->con, $qr);
+    }
 }
 
 ?>

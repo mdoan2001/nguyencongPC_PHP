@@ -8,8 +8,7 @@
 // print_r($data["array"]);
 // echo '</pre>';
 
-// echo $data["lastID"];
+echo $data["data"] . '<br>';
+echo $data["data2"] . '<br>';
 
-echo $data["n1"];
-echo $data["n2"];
 ?>

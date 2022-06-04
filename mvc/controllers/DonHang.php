@@ -6,6 +6,8 @@ class DonHang extends Controller{
     private $cartModel;
     private $orderModel;
     private $soLuongSanPham;
+    private $loaiTaiKhoan;
+
     public function __construct()
     {
         $this->cartModel = $this->model("GioHangModel");
@@ -27,13 +29,20 @@ class DonHang extends Controller{
             $_SESSION["loaiTaiKhoan"] = 1;
 
         if( !empty($_SESSION["email"])){
+            //get loai tai khoan
+            $modelUser = $this->model("UsersModel");
+            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
+            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
+            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
             $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
         }
         else{
-            $this->soLuongSanPham = 0 ;
+            $this->soLuongSanPham = 0;
+            $this->loaiTaiKhoan = 1;
         }
         
     }

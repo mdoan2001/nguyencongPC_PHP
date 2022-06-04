@@ -4,6 +4,7 @@ class SanPham extends Controller{
     private $ct, $sp, $kh, $nsxModel;
     private $nsx = array();
     private $soLuongSanPham;
+    private $loaiTaiKhoan;
     
     function __construct()
     {
@@ -18,11 +19,14 @@ class SanPham extends Controller{
             array_push($this->nsx, $item);
         }
 
-        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
-            $_SESSION["loaiTaiKhoan"] = 1;
-        
-
         if(!empty($_SESSION["email"])){
+            //get loai tai khoan
+            $modelUser = $this->model("UsersModel");
+            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
+            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
+            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+
+
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
@@ -30,6 +34,7 @@ class SanPham extends Controller{
         }
         else{
             $this->soLuongSanPham = 0 ;
+            $this->loaiTaiKhoan = 1;
         }
     }
 
@@ -57,7 +62,7 @@ class SanPham extends Controller{
 
         
 
-        if($_SESSION["loaiTaiKhoan"] == 0){             
+        if($this->loaiTaiKhoan == 0){             
             $this->view("admin","Layout", [
                 "page"=>"ChiTietSanPham",
                 "des"=>$des,
@@ -85,7 +90,7 @@ class SanPham extends Controller{
             array_push($arrsp, $item);
         }
 
-        if($_SESSION["loaiTaiKhoan"] == 0){             
+        if($this->loaiTaiKhoan == 0){             
             
             $this->view("admin", "Layout", [
                 "page"=>"SanPham",

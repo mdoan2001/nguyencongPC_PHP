@@ -5,6 +5,7 @@ class Home extends Controller{
     private $nsxModel;
     private $nsx = array();
     private $soLuongSanPham;
+    private $loaiTaiKhoan;
     public function __construct()
     {
         
@@ -20,10 +21,17 @@ class Home extends Controller{
             array_push($this->nsx, $item);
         }
 
-        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
-            $_SESSION["loaiTaiKhoan"] = 1;
+        
+
 
         if(!empty($_SESSION["email"])){
+            //get loai tai khoan
+            $modelUser = $this->model("UsersModel");
+            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
+            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
+            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+
+
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
@@ -31,6 +39,7 @@ class Home extends Controller{
         }
         else{
             $this->soLuongSanPham = 0 ;
+            $this->loaiTaiKhoan = 1;
         }
         
     }
@@ -45,21 +54,20 @@ class Home extends Controller{
             $arr1[$item["tenNSX"]][] = $item;
         }
 
-
-        if($_SESSION["loaiTaiKhoan"] == 1){             
+        if($this->loaiTaiKhoan == 0){      
+            $this->view("admin","Layout", [
+                "page"=>"SanPham",
+                "array"=>$arr,
+                "nsx"=>$this->nsx
+            ]);            
+        }
+        else{
             $this->view("user","Layout", [
                 "page"=>"Home",
                 "array"=>$arr1,
                 "nsx"=>$this->nsx,
                 "title"=>"Máy tính Nguyễn Công",
                 "tongSl"=>$this->soLuongSanPham
-            ]);
-        }
-        else{
-            $this->view("admin","Layout", [
-                "page"=>"SanPham",
-                "array"=>$arr,
-                "nsx"=>$this->nsx
             ]);
         }
                 

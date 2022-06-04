@@ -5,6 +5,8 @@ class GioHang extends Controller{
     private $nsx = array();
     private $cartModel;
     private $soLuongSanPham;
+    private $loaiTaiKhoan;
+
     public function __construct()
     {
         $this->cartModel = $this->model("GioHangModel");
@@ -21,10 +23,14 @@ class GioHang extends Controller{
             array_push($this->nsx, $item);
         }
 
-        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
-            $_SESSION["loaiTaiKhoan"] = 1;
-
         if( !empty($_SESSION["email"])){
+            //get loai tai khoan
+            $modelUser = $this->model("UsersModel");
+            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
+            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
+            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+
+            
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
@@ -32,6 +38,7 @@ class GioHang extends Controller{
         }
         else{
             $this->soLuongSanPham = 0 ;
+            $this->loaiTaiKhoan = 1;
         }
         
     }

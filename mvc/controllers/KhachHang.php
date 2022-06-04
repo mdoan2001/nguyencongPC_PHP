@@ -4,6 +4,8 @@ class KhachHang extends Controller{
     private $nsxModel;
     private $nsx = array();
     private $soLuongSanPham;
+    private $loaiTaiKhoan;
+
     function __construct()
     {
         $this->nsxModel = $this->model("NSXModel");
@@ -14,10 +16,15 @@ class KhachHang extends Controller{
             array_push($this->nsx, $item);
         }
         
-        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
-            $_SESSION["loaiTaiKhoan"] = 1;
 
         if( !empty($_SESSION["email"])){
+            //get loai tai khoan
+            $modelUser = $this->model("UsersModel");
+            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
+            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
+            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+
+
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
@@ -25,6 +32,8 @@ class KhachHang extends Controller{
         }
         else{
             $this->soLuongSanPham = 0 ;
+            $this->loaiTaiKhoan = 1;
+
         }
 
     }
@@ -149,7 +158,8 @@ class KhachHang extends Controller{
                 $_SESSION["loaiTaiKhoan"] = $user["loaiTaiKhoan"];
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["hoTen"] = $user["hoTen"];
-               header('Location: http://localhost/nguyencongpc/Home');                        
+                header('Location: http://localhost/nguyencongpc/Home');   
+       
            }
            else{
             $_SESSION["isLogin"] = 0;
