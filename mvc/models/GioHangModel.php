@@ -34,6 +34,10 @@ class GioHangModel extends DB{
         return mysqli_query($this->con, $qr);
 
     }
+    public function getSoLuongSanPham($email){
+        $qr = "SELECT SUM(soLuong) as 'soLuong'FROM giohang WHERE email = '$email'";
+        return mysqli_query($this->con, $qr);
+    }
     
 }
 

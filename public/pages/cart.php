@@ -56,53 +56,35 @@
 
 
         <!-- ĐẶT HÀNG -->
-        <form action="" class="content__order">
+        <form action="http://localhost/nguyencongpc/test" method="POST" class="content__order">
+            <input name="ngayMua" type="hidden" value="<?php echo  date("Y-m-d "); ?>">
             <div class="content__order-col">
                 <div class="content__order-tittle">THÔNG TIN NGƯỜI MUA</div>
                 <p class="content__order-text">Để tiếp tục đặt hàng, quý khách xin vui lòng nhập thông tin bên dưới</p>
                 <div class="content__order-item">
                     <label class="content__order-label">Họ tên*</label>
-                    <input type="text" class="content__order-input" required>
+                    <input name="hoTen" type="text" class="content__order-input" required>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">SĐT*</label>
-                    <input type="text" class="content__order-input" required>
+                    <input name="SDT" type="text" class="content__order-input" required>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Email*</label>
-                    <input type="email" class="content__order-input" required>
+                    <input type="email" class="content__order-input" value="<?php echo $_SESSION["email"] ?>" disabled>
+                    <input name="email" type="hidden" class="content__order-input" value="<?php echo $_SESSION["email"] ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Địa chỉ*</label>
-                    <input type="text" class="content__order-input" required>
-                </div>
-
-                <div class="content__order-item">
-                    <label class="content__order-label">Tỉnh/Thành Phố</label>
-                    <select name="" id="" class="content__order-select">
-                        <option value="" class="content__order-option" selected>Chọn Tỉnh/Thành Phố</option>
-                        <option value="" class="content__order-option">Hà Nội</option>
-                        <option value="" class="content__order-option">Đà Nẵng</option>
-                        <option value="" class="content__order-option">Hồ Chí Minh</option>
-                    </select>
-                </div>
-
-                <div class="content__order-item">
-                    <label class="content__order-label">Quận/Huyện</label>
-                    <select name="" id="" class="content__order-select">
-                        <option value="" class="content__order-option" selected>Chọn Quận/Huyện</option>
-                        <option value="" class="content__order-option">Quận Cầu Giấy</option>
-                        <option value="" class="content__order-option">Quận Đống Đa</option>
-                        <option value="" class="content__order-option">Quận Nam Từ Liêm</option>
-                    </select>
+                    <input name="diaChi" type="text" class="content__order-input" required>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Ghi chú</label>
-                    <textarea name="" id="" cols="30" rows="10" class="content__order-tarea"></textarea>
+                    <textarea name="ghiChu" id="" cols="30" rows="10" class="content__order-tarea"></textarea>
                 </div>
             </div>
             <div class="content__order-col">
@@ -132,18 +114,6 @@
                 </div>
 
                 <div class="content__order-click">
-                    <button class="content__order-btn content__order-btn--50">
-                        <i class="fa-solid fa-file-excel content__order-btn-icon"></i> TẢI FILE EXCEL
-                    </button>
-                    <button class="content__order-btn content__order-btn--50">
-                        <i class="fa-solid fa-file content__order-btn-icon"></i> IN BÁO CÁO
-                    </button>
-                    <button class="content__order-btn content__order-btn--100">
-                        TẢI ẢNH BÁO GIÁ
-                    </button>
-                    <button class="content__order-btn content__order-btn--100 content__order-btn--orange">
-                        MUA TRẢ GÓP
-                    </button>
                     <button id="submit" class="content__order-btn content__order-btn--100 content__order-btn--red">
                         <i class="fa-solid fa-check content__order-btn-icon"></i>ĐẶT HÀNG
                     </button>

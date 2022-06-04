@@ -3,7 +3,7 @@ class KhachHang extends Controller{
     
     private $nsxModel;
     private $nsx = array();
-
+    private $soLuongSanPham;
     function __construct()
     {
         $this->nsxModel = $this->model("NSXModel");
@@ -12,6 +12,19 @@ class KhachHang extends Controller{
         $list = $this->nsxModel->GetList();
         while($item = mysqli_fetch_assoc($list)){
             array_push($this->nsx, $item);
+        }
+        
+        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
+            $_SESSION["loaiTaiKhoan"] = 1;
+
+        if( !empty($_SESSION["email"])){
+            $cartModel = $this->model("GioHangModel");      
+            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+        }
+        else{
+            $this->soLuongSanPham = 0 ;
         }
 
     }

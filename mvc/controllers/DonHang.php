@@ -1,5 +1,5 @@
 <?php
-class GioHang extends Controller{
+class DonHang extends Controller{
 
     private $nsxModel;
     private $nsx = array();
@@ -62,31 +62,6 @@ class GioHang extends Controller{
         ]);
                 
     }
-    public function themGioHang($maSanPham){
-        $num = $this->cartModel->checkMaSanPham($maSanPham);
-        if($num == 0){
-            $this->cartModel->Insert($_SESSION["email"], $maSanPham, 1);
-            header('Location: http://localhost/nguyencongpc/GioHang');                        
-        }
-        else{
-            $this->cartModel->tangSoLuong($maSanPham);
-            header('Location: http://localhost/nguyencongpc/GioHang');                        
-        }
-    }
-    public function tangSoLuong($maSanPham){
-        $this->cartModel->tangSoLuong($maSanPham);
-        header('Location: http://localhost/nguyencongpc/GioHang');                        
-
-    }
-    public function giamSoLuong($maSanPham){
-        $this->cartModel->giamSoLuong($maSanPham);
-        header('Location: http://localhost/nguyencongpc/GioHang');                        
-
-    }
-    public function Delete($maSanPham){
-        $this->cartModel->Delete($maSanPham);
-        header('Location: http://localhost/nguyencongpc/GioHang');   
-
-    }
+   
 }
 ?>

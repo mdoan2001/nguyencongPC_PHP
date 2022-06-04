@@ -4,6 +4,7 @@ class Home extends Controller{
 
     private $nsxModel;
     private $nsx = array();
+    private $soLuongSanPham;
     public function __construct()
     {
         
@@ -19,8 +20,19 @@ class Home extends Controller{
             array_push($this->nsx, $item);
         }
 
-        if(!isset($_SESSION["loaiTaiKhoan"]))
+        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
             $_SESSION["loaiTaiKhoan"] = 1;
+
+        if(!empty($_SESSION["email"])){
+            $cartModel = $this->model("GioHangModel");      
+            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+        }
+        else{
+            $this->soLuongSanPham = 0 ;
+        }
+        
     }
 
     public function Show(){
@@ -39,7 +51,8 @@ class Home extends Controller{
                 "page"=>"Home",
                 "array"=>$arr1,
                 "nsx"=>$this->nsx,
-                "title"=>"Máy tính Nguyễn Công"
+                "title"=>"Máy tính Nguyễn Công",
+                "tongSl"=>$this->soLuongSanPham
             ]);
         }
         else{

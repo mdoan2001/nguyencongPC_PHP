@@ -3,7 +3,8 @@ class SanPham extends Controller{
 
     private $ct, $sp, $kh, $nsxModel;
     private $nsx = array();
-
+    private $soLuongSanPham;
+    
     function __construct()
     {
         $this->ct = $this->model("ChiTietSanPhamModel");
@@ -17,8 +18,19 @@ class SanPham extends Controller{
             array_push($this->nsx, $item);
         }
 
-        if(empty($_SESSION["loaiTaiKhoan"]))
+        if(empty($_SESSION["loaiTaiKhoan"]) || !isset($_SESSION["loaiTaiKhoan"]))
             $_SESSION["loaiTaiKhoan"] = 1;
+        
+
+        if(!empty($_SESSION["email"])){
+            $cartModel = $this->model("GioHangModel");      
+            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            $this->soLuongSanPham = mysqli_fetch_assoc($soLuongSanPham);
+            $this->soLuongSanPham = $this->soLuongSanPham["soLuong"];
+        }
+        else{
+            $this->soLuongSanPham = 0 ;
+        }
     }
 
     public function Show(){
@@ -57,7 +69,8 @@ class SanPham extends Controller{
                 "page"=>"product-detail",
                 "array"=>$des,
                 "nsx"=>$this->nsx,
-                "title"=>"Chi tiết sản phẩm"
+                "title"=>"Chi tiết sản phẩm",
+                "tongSl"=>$this->soLuongSanPham
             ]);
         }
     }
@@ -85,7 +98,8 @@ class SanPham extends Controller{
                 "page"=>"ListSanPham",
                 "array"=>$arrsp,
                 "nsx"=>$this->nsx,
-                "title"=>"Danh sách sản phẩm"
+                "title"=>"Danh sách sản phẩm",
+                "tongSl"=>$this->soLuongSanPham
             ]);
         }
         
