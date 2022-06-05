@@ -43,6 +43,7 @@ class Home extends Controller{
             $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
         }
         else{
+            $this->soLuongDonHang =0;
             $this->soLuongSanPham = 0 ;
             $this->loaiTaiKhoan = 1;
         }

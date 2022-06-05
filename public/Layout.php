@@ -147,7 +147,7 @@
                                 <p class="header__main-options-text">Khuyến mại</p>
                             </div>
                             <a href="http://localhost/nguyencongpc/DonHang/ShowByEmail" class="header__main-options-item header__cart">
-                                <i class="header__main-options-icon fa-solid fa-money-bill"></i>
+                                <i class="header__main-options-icon fa-solid fa-money-bill-1-wave"></i>
                                 <p class="header__main-options-text">Đơn hàng đã đặt</p>                                                        
                                 <span class="header__cart-count" style="top: -7px; right: 40px;">
                                     <?php echo $data["SLDH"]?>
@@ -213,8 +213,8 @@
                                 <i class="header__main-options-icon fa-solid fa-gift"></i>
                                 <p class="header__main-options-text">Khuyến mại</p>
                             </div>
-                            <a href="http://localhost/nguyencongpc/DonHang/ShowByEmail" class="header__main-options-item">
-                                <i class="header__main-options-icon fa-solid fa-money-bill"></i>
+                            <a href="http://localhost/nguyencongpc/DonHang/ShowByEmail" class="header__main-options-item header__cart">
+                                <i class="header__main-options-icon fa-solid fa-money-bill-1-wave"></i>
                                 <p class="header__main-options-text">Đơn hàng đã đặt</p>
                                 <span class="header__cart-count" style="top: -7px; right: 40px;">
                                     <?php echo $data["SLDH"]?>

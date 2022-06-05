@@ -40,6 +40,7 @@ class SanPham extends Controller{
             $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
         }
         else{
+            $this->soLuongDonHang =0;
             $this->soLuongSanPham = 0 ;
             $this->loaiTaiKhoan = 1;
         }
@@ -51,12 +52,18 @@ class SanPham extends Controller{
         $data = $this->ct->ChiTietSanPham($id);
         $des = mysqli_fetch_assoc($data);
 
+        if($this->loaiTaiKhoan == 0){
+            $this->view("admin","Layout", [
+                "page"=>"ChiTietSanPham",
+                "des"=>$des,
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+        }
 
-        $this->view("admin","Layout", [
-            "page"=>"ChiTietSanPham",
-            "des"=>$des,
-            "nsx"=>$this->nsx
-        ]);
+        
     }
 
 
@@ -122,81 +129,106 @@ class SanPham extends Controller{
 
     public function ThemMoi(){
 
-        //VIEW
-        $this->view("admin", "Layout", [
-            "page"=>"ThemMoiSanPham",
-            "nsx"=>$this->nsx
-        ]);
+        if($this->loaiTaiKhoan == 0){
+            //VIEW
+            $this->view("admin", "Layout", [
+                "page"=>"ThemMoiSanPham",
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+        }
+
+        
     }
 
     public function Insert(){
-        if(isset($_POST['ten']) && isset($_POST['nsx']) && isset($_POST['gia']) && isset($_POST['anh']) &&
-        isset($_POST['cpu']) && isset($_POST['vga']) && isset($_POST['ram']) && isset($_POST['dl']) &&
-        isset($_POST['tl']) && isset($_POST['mau']) && isset($_POST['sl'])){
-            $ten = $_POST['ten'];
-            $nsx = $_POST['nsx'];
-            $gia = $_POST['gia'];
-            $anh = $_POST['anh'];
-            $cpu = $_POST['cpu'];
-            $vga = $_POST['vga'];
-            $ram = $_POST['ram'];
-            $dl = $_POST['dl'];
-            $tl = $_POST['tl'];
-            $mau = $_POST['mau'];
-            $sl = $_POST['sl'];
 
-            if($gia>0 && is_numeric($gia)){
-                $this->sp->Insert($ten, $nsx, $anh, $gia);
+        if($this->loaiTaiKhoan == 0){
+            if(isset($_POST['ten']) && isset($_POST['nsx']) && isset($_POST['gia']) && isset($_POST['anh']) &&
+            isset($_POST['cpu']) && isset($_POST['vga']) && isset($_POST['ram']) && isset($_POST['dl']) &&
+            isset($_POST['tl']) && isset($_POST['mau']) && isset($_POST['sl'])){
+                $ten = $_POST['ten'];
+                $nsx = $_POST['nsx'];
+                $gia = $_POST['gia'];
+                $anh = $_POST['anh'];
+                $cpu = $_POST['cpu'];
+                $vga = $_POST['vga'];
+                $ram = $_POST['ram'];
+                $dl = $_POST['dl'];
+                $tl = $_POST['tl'];
+                $mau = $_POST['mau'];
+                $sl = $_POST['sl'];
 
-                //GET LAST ID
-                $data = $this->sp->getLastId();
-                $data = mysqli_fetch_assoc($data);
-                $id = $data['id'];
+                if($gia>0 && is_numeric($gia)){
+                    $this->sp->Insert($ten, $nsx, $anh, $gia);
 
-                $this->kh->Insert($id, $sl);
-                $this->ct->Insert($id, $cpu, $vga, $ram, $dl, $tl, $mau);
+                    //GET LAST ID
+                    $data = $this->sp->getLastId();
+                    $data = mysqli_fetch_assoc($data);
+                    $id = $data['id'];
+
+                    $this->kh->Insert($id, $sl);
+                    $this->ct->Insert($id, $cpu, $vga, $ram, $dl, $tl, $mau);
+                    header('Location: http://localhost/nguyencongpc/Home');
+
+                }
+                
                 header('Location: http://localhost/nguyencongpc/Home');
-
+                
             }
-            
-            header('Location: http://localhost/nguyencongpc/Home');
-            
         }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+
+        }
+
+        
     }
 
     public function UpdateById(){
-        if(isset($_POST['id']) && isset($_POST['ten']) && isset($_POST['nsx']) && isset($_POST['gia']) && isset($_POST['anh']) &&
-        isset($_POST['cpu']) && isset($_POST['vga']) && isset($_POST['ram']) && isset($_POST['dl']) &&
-        isset($_POST['tl']) && isset($_POST['mau']) && isset($_POST['sl'])){
-            $id = $_POST['id'];
-            $ten = $_POST['ten'];
-            $nsx = $_POST['nsx'];
-            $gia = $_POST['gia'];
-            $anh = $_POST['anh'];
-            $cpu = $_POST['cpu'];
-            $vga = $_POST['vga'];
-            $ram = $_POST['ram'];
-            $dl = $_POST['dl'];
-            $tl = $_POST['tl'];
-            $mau = $_POST['mau'];
-            $sl = $_POST['sl'];
 
-            if($gia>0 && is_numeric($gia)){
-                $this->sp->UpdateById($id, $ten, $nsx, $anh, $gia);
-                $this->ct->UpdateById($id, $cpu, $vga, $ram, $dl, $tl, $mau);
-                $this->kh->UpdateById($id, $sl);
-                header('Location: http://localhost/nguyencongpc/Layout');
+        if($this->loaiTaiKhoan == 0){
+            if(isset($_POST['id']) && isset($_POST['ten']) && isset($_POST['nsx']) && isset($_POST['gia']) && isset($_POST['anh']) &&
+            isset($_POST['cpu']) && isset($_POST['vga']) && isset($_POST['ram']) && isset($_POST['dl']) &&
+            isset($_POST['tl']) && isset($_POST['mau']) && isset($_POST['sl'])){
+                $id = $_POST['id'];
+                $ten = $_POST['ten'];
+                $nsx = $_POST['nsx'];
+                $gia = $_POST['gia'];
+                $anh = $_POST['anh'];
+                $cpu = $_POST['cpu'];
+                $vga = $_POST['vga'];
+                $ram = $_POST['ram'];
+                $dl = $_POST['dl'];
+                $tl = $_POST['tl'];
+                $mau = $_POST['mau'];
+                $sl = $_POST['sl'];
 
+                if($gia>0 && is_numeric($gia)){
+                    $this->sp->UpdateById($id, $ten, $nsx, $anh, $gia);
+                    $this->ct->UpdateById($id, $cpu, $vga, $ram, $dl, $tl, $mau);
+                    $this->kh->UpdateById($id, $sl);
+                    header('Location: http://localhost/nguyencongpc/Home');
+                }     
+                header('Location: http://localhost/nguyencongpc/Home');              
             }
-            
-            header('Location: http://localhost/nguyencongpc/Layout');
-            
         }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+        }
+
+        
     }
     public function DeleteById($id){
-        $this->ct->DeleteById($id);
-        $this->sp->DeleteById($id);
-        header('Location: http://localhost/nguyencongpc/Layout');
+        if($this->loaiTaiKhoan ==0){
+
+            $this->model("KhoHangModel")->DeleteById($id);
+            $this->ct->DeleteById($id);
+            $this->sp->DeleteById($id);
+        }
+        header('Location: http://localhost/nguyencongpc/Home');
     }
     
 }

@@ -10,6 +10,10 @@ class KhoHangModel extends DB{
         $qr = "UPDATE `khohang` SET `soLuong` = '$sl' WHERE `khohang`.`id` = $id;";
         return mysqli_query($this->con, $qr);
     }
+    public function DeleteById($id){
+        $qr = "DELETE FROM `khohang` WHERE `khohang`.`id` = $id;";
+        return mysqli_query($this->con, $qr);
+    }
     
 }
 

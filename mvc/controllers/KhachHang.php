@@ -38,6 +38,7 @@ class KhachHang extends Controller{
             $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
         }
         else{
+            $this->soLuongDonHang =0;
             $this->soLuongSanPham = 0 ;
             $this->loaiTaiKhoan = 1;
         }
@@ -59,6 +60,9 @@ class KhachHang extends Controller{
                 "users"=>$users
             ]);
         }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+        }
             
     }
     
@@ -68,38 +72,53 @@ class KhachHang extends Controller{
         $list = $UsersModel->GetUserByEmail($email);
         $user = mysqli_fetch_assoc($list);
 
-        $this->view("admin","Layout", [
-            "page"=>"ChiTietKhachHang",
-            "nsx"=>$this->nsx,
-            "user"=>$user
-        ]);
+        if($this->loaiTaiKhoan == 0 && $_SESSION["isLogin"] == 1){
+            $this->view("admin","Layout", [
+                "page"=>"ChiTietKhachHang",
+                "nsx"=>$this->nsx,
+                "user"=>$user
+            ]);
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+            
+        }
+
+        
     }
     public function ThemMoi(){
-        $this->view("admin", "Layout", [
-            "page"=>"ThemMoiKhachHang",
-            "nsx"=>$this->nsx
-        ]);
+        if($this->loaiTaiKhoan == 0 && $_SESSION["isLogin"] == 1){
+            $this->view("admin", "Layout", [
+                "page"=>"ThemMoiKhachHang",
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');  
+        }
     }
     public function Insert(){
-        if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
-        && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
-            $hoTen = $_POST["hoTen"];
-            $email = $_POST["email"];
-            $matKhau = $_POST["matKhau"];
-            $loaiTaiKhoan = $_POST["loaiTaiKhoan"];
-            $diaChi = $_POST["diaChi"];
-            $SDT = $_POST["SDT"];
+        if($_SESSION["isLogin"] == 1){
+            if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
+            && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
+                $hoTen = $_POST["hoTen"];
+                $email = $_POST["email"];
+                $matKhau = $_POST["matKhau"];
+                $loaiTaiKhoan = $_POST["loaiTaiKhoan"];
+                $diaChi = $_POST["diaChi"];
+                $SDT = $_POST["SDT"];
 
-            $UsersModel = $this->model("UsersModel");
-            $UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-            
-            if($this->loaiTaiKhoan == 0 ){
-                header('Location: http://localhost/nguyencongpc/KhachHang');
+                $UsersModel = $this->model("UsersModel");
+                $UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
+                
+                if($this->loaiTaiKhoan == 0 ){
+                    header('Location: http://localhost/nguyencongpc/KhachHang');
+                }
+                else{
+                    header('Location: http://localhost/nguyencongpc/Home');
+                }
+                
             }
-            else{
-                header('Location: http://localhost/nguyencongpc/Home');
-            }
-            
         }
         
         if($this->loaiTaiKhoan == 0 ){
@@ -110,32 +129,50 @@ class KhachHang extends Controller{
         }
     }
     public function UpdateByEmail(){
-        if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
-        && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
-            $hoTen = $_POST["hoTen"];
-            $email = $_POST["email"];
-            $matKhau = $_POST["matKhau"];
-            $loaiTaiKhoan = $_POST["loaiTaiKhoan"];
-            $diaChi = $_POST["diaChi"];
-            $SDT = $_POST["SDT"];
+        if($_SESSION["isLogin"] == 1){
+                if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
+            && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
+                $hoTen = $_POST["hoTen"];
+                $email = $_POST["email"];
+                $matKhau = $_POST["matKhau"];
+                $loaiTaiKhoan = $_POST["loaiTaiKhoan"];
+                $diaChi = $_POST["diaChi"];
+                $SDT = $_POST["SDT"];
 
-            $UsersModel = $this->model("UsersModel");
-            $UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-            header('Location: http://localhost/nguyencongpc/KhachHang');
-            
+                $UsersModel = $this->model("UsersModel");
+                $UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
+                header('Location: http://localhost/nguyencongpc/KhachHang');
+                
+            }
+            else{
+                header('Location: http://localhost/nguyencongpc/KhachHang');
+            }
         }
-        header('Location: http://localhost/nguyencongpc/KhachHang');
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');
+
+        }
     }
     public function DeleteByEmail($id){
-        $UsersModel = $this->model("UsersModel");
-        $UsersModel->DeleteByEmail($id);
-        header('Location: http://localhost/nguyencongpc/KhachHang');
+        if($_SESSION["isLogin"] == 1){
+            if($this->loaiTaiKhoan == 0){
+                $UsersModel = $this->model("UsersModel");
+                $UsersModel->DeleteByEmail($id);
+                header('Location: http://localhost/nguyencongpc/KhachHang');
+            }
+            else{
+                header('Location: http://localhost/nguyencongpc/Home');
+            }
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');
+
+        }
     }
 
     // Dang nhap, dang ky, dang xuat
 
     public function login(){
-
         $this->view("user", "Layout", [
             "page"=>"login",
             "nsx"=>$this->nsx,
@@ -157,12 +194,16 @@ class KhachHang extends Controller{
         ]);
     }
     public function Logout(){
-        $_SESSION["isLogin"] = 0;
-        $_SESSION["loaiTaiKhoan"] = 1;
-        $_SESSION["email"] = "";
-        $_SESSION["hoTen"] = "";
-        header('Location: http://localhost/nguyencongpc/Home');
-
+        if($_SESSION["isLogin"] == 1){
+            $_SESSION["isLogin"] = 0;
+            $_SESSION["loaiTaiKhoan"] = 1;
+            $_SESSION["email"] = "";
+            $_SESSION["hoTen"] = "";
+            header('Location: http://localhost/nguyencongpc/Home');
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');
+        }
     }
 
 

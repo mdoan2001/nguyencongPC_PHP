@@ -69,7 +69,8 @@
 
                 <div class="content__order-click">
                     <button id="submit" class="content__order-btn content__order-btn--100 content__order-btn--red">
-                        <i class="fa-solid fa-check content__order-btn-icon"></i>HỦY ĐƠN HÀNG
+                        <i class="fa-solid fa-xmark content__order-btn-icon"></i>HỦY ĐƠN HÀNG
+                        
                     </button>
                     <script>
                         document.getElementById("submit").submit();

@@ -7,6 +7,11 @@ class NhanVien extends Controller{
 
     function __construct()
     {
+        //Kiem tra dang nhap
+        if($_SESSION["isLogin"]== 0 ){
+            header('Location: http://localhost/nguyencongpc/');                                   
+        }
+
         $this->nsxModel= $this->model("NSXModel");
         $this->nvModel = $this->model("NhanVienModel");
 

@@ -65,7 +65,7 @@
                         <i class="fa-solid fa-check content__order-btn-icon"></i>CHI TIẾT ĐƠN HÀNG
                     </a>
                     <a href="http://localhost/nguyencongpc/DonHang/HuyDonHangById/<?php echo $data['content'][$i]['id']?>" id="submit" class="content__order-btn content__order-btn--100 content__order-btn--red">
-                        <i class="fa-solid fa-check content__order-btn-icon"></i>HỦY ĐƠN HÀNG
+                        <i class="fa-solid fa-xmark content__order-btn-icon"></i>HỦY ĐƠN HÀNG
                     </a>
                 </div>
             </div>
