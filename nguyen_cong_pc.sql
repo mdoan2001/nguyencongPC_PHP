@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2022 at 12:03 PM
+-- Generation Time: Jun 05, 2022 at 08:37 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -40,10 +40,10 @@ CREATE TABLE `chitietdonhang` (
 --
 
 INSERT INTO `chitietdonhang` (`id`, `maDonHang`, `maSanPham`, `soLuong`, `tongTien`) VALUES
-(2, 3, 2, 1, 12000000),
-(3, 4, 4, 3, 167970000),
-(4, 4, 12, 1, 23990000),
-(5, 4, 31, 2, 22980000);
+(37, 19, 2, 1, 12000000),
+(38, 19, 4, 2, 111980000),
+(39, 20, 4, 1, 55990000),
+(40, 21, 30, 1, 13990000);
 
 -- --------------------------------------------------------
 
@@ -140,8 +140,9 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`id`, `email`, `ngayMua`, `hoTen`, `SDT`, `diaChi`, `ghiChu`) VALUES
-(3, 'thuy@gmail.com', '2022-06-04', 'Nguyễn Thanh Thùy', '123456', 'Hưng Yên', '123'),
-(4, 'mdoan2001@gmail.com', '2022-06-04', 'Nguyễn Minh Đoàn', '0962662287', 'Hưng Yên', 'Giao hàng buổi tối');
+(19, 'mdoan2001@gmail.com', '2022-06-05', 'Nguyễn Minh Đoàn', '0962662287', 'Văn Giang - Hưng Yên', ''),
+(20, 'mdoan2001@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', ''),
+(21, 'duc@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', 'Giao hàng ban trưa');
 
 -- --------------------------------------------------------
 
@@ -160,9 +161,10 @@ CREATE TABLE `giohang` (
 --
 
 INSERT INTO `giohang` (`email`, `maSanPham`, `soLuong`) VALUES
-('mdoan2001@gmail.com', 2, 3),
-('mdoan2001@gmail.com', 25, 2),
-('thuy@gmail.com', 5, 2);
+('duc@gmail.com', 30, 1),
+('mdoan2001@gmail.com', 4, 1),
+('thuy@gmail.com', 5, 2),
+('thuy@gmail.com', 25, 1);
 
 -- --------------------------------------------------------
 
@@ -376,6 +378,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `hoTen`, `matKhau`, `loaiTaiKhoan`, `diaChi`, `SDT`) VALUES
 ('admin@gmail.com', 'ADMIN', '$2y$10$15bxKG4Qimh7SaZRBO88ke9EM8jCOXOoor4OmMcdXkCYVvI/yWEiO', 0, 'Hà Nội', '113'),
+('duc@gmail.com', 'Nguyễn Anh Đức', '$2y$10$vO7vVXR6fk8S50Cz2K4YKOy7K0UgV7JjTPt4tp396IvwTPNQ0AiVW', 1, 'Bắc Từ Liêm - Hà Nội', '113114115'),
 ('mdoan2001@gmail.com', 'Nguyễn Minh Đoàn', '$2y$10$uKKRndnuz7Qmb4dAFEN8oOsVIxnl7NWpB1VNFtF6UJJ7BR4SioNka', 1, 'Văn Giang - Hưng Yên', '0962662287'),
 ('thuy@gmail.com', 'Thanh Thuỳ', '$2y$10$mLBqLGFnoX/23fTsUQbpXexJc0.GmabRELChSbdEyhXMNozfyzaLK', 1, 'Hưng Yên', '123456789');
 
@@ -450,7 +453,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `chitietsanpham`
@@ -462,7 +465,7 @@ ALTER TABLE `chitietsanpham`
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `hangsanxuat`

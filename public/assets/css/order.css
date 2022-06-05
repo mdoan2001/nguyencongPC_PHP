@@ -1,0 +1,271 @@
+.content__head {
+    padding: 12px;
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+.content__head-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content__head-row--border {
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.content__head-row>div {
+    display: flex;
+}
+
+.content__head-tittle {
+    font-size: 2rem;
+    line-height: 40px;
+    font-weight: 800;
+}
+
+.content__head-tittle+.content__head-tittle {
+    margin-left: 60px;
+}
+
+.content__head-name {
+    font-size: 16px;
+    line-height: 66px;
+}
+
+.content__head-name+.content__head-name {
+    margin-left: 100px;
+}
+
+
+/* SAN PHAM */
+
+.content__product {
+    margin-top: 10px;
+    padding: 12px 12px 20px 12px;
+    display: flex;
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+.content__product-img {
+    width: 126px;
+    height: 92px;
+}
+
+.content__product-des {
+    flex: 1;
+}
+
+.content__product-name {
+    font-size: 1.6rem;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.content__product-text {
+    font-size: 1.4rem;
+    padding: 3px 0;
+}
+
+.content__product-text--red {
+    font-weight: 700;
+    color: #FF0000;
+}
+
+.content__product-price {
+    width: 158px;
+    font-size: 1.6rem;
+}
+
+.content__product-quantity {
+    width: 150px;
+    display: flex;
+}
+
+.content__product-btn {
+    height: 30px;
+    width: 30px;
+    background-color: #ebebeb;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+.content__product-quantity-text {
+    font-size: 1.6rem;
+    padding: 0 12px;
+    line-height: 30px;
+}
+
+.content__product-money {
+    width: 150px;
+    font-size: 1.6rem;
+    color: #dd1313;
+    font-weight: 800;
+}
+
+.content__product-remove {
+    width: 100px;
+    text-align: center;
+    transform: translateX(15px);
+}
+
+.content__product-remove-icon {
+    font-size: 1.4rem;
+    color: #b1b2b2;
+    cursor: pointer;
+}
+
+.content__order {
+    display: flex;
+    margin: 12px 0;
+    background-color: #FFF;
+    padding: 20px 4px;
+    border-radius: 10px;
+}
+
+.content__order-col {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.content__order-tittle {
+    font-size: 1.6rem;
+    background-color: #f4f4f4;
+    line-height: 54px;
+    border-radius: 5px;
+    font-weight: 900;
+    padding-left: 12px;
+    margin-bottom: 12px;
+}
+
+.content__order-text {
+    font-size: 1.6rem;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.content__order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 26px;
+}
+
+.content__order-label {
+    font-size: 1.6rem;
+    margin: 0 0 8px;
+    min-width: 130px;
+}
+
+.content__order-input,
+.content__order-select,
+.content__order-option {
+    font-size: 1.6rem;
+    padding: 8px;
+    flex: 1;
+    border-radius: 5px;
+}
+
+.content__order-tarea {
+    overflow: auto;
+    resize: vertical;
+    height: 78px;
+    padding: 5px;
+    font-size: 1.6rem;
+}
+
+.content__order-pay {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.content__order-pay-label {
+    font-size: 1.6rem;
+    padding-left: 12px;
+    cursor: pointer;
+}
+
+.content__order-pay+.content__order-pay {
+    margin-top: 12px;
+}
+
+
+/* TONG TIEN */
+
+.content__order-money {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.content__order-num,
+.content__order-text {
+    font-size: 1.6rem;
+}
+
+.content__order-text--bold {
+    font-weight: 900;
+}
+
+.content__order-num--red {
+    font-size: 2rem;
+    color: #dd1313;
+    font-weight: 900;
+}
+
+
+/* NUT MUA HANG */
+
+.content__order-click {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.content__order-btn {
+    border: none;
+    padding: 0 10px;
+    line-height: 50px;
+    background-color: #0f5b99;
+    color: #FFF;
+    text-transform: uppercase;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.content__order-btn-icon,
+.content__order-btn {
+    font-size: 1.6rem;
+}
+
+.content__order-btn-icon {
+    padding-right: 5px;
+}
+
+.content__order-btn--50 {
+    flex-basis: 49%;
+}
+
+.content__order-btn--100 {
+    flex-basis: 100%;
+}
+
+.content__order-btn--orange {
+    background-color: #ff9f00;
+}
+
+.content__order-btn--red {
+    background-color: #ed1b24;
+}

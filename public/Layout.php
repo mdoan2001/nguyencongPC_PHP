@@ -146,15 +146,18 @@
                                 <i class="header__main-options-icon fa-solid fa-gift"></i>
                                 <p class="header__main-options-text">Khuyến mại</p>
                             </div>
-                            <div class="header__main-options-item" onclick="showInfoToast();">
-                                <i class="header__main-options-icon fa-solid fa-desktop"></i>
-                                <p class="header__main-options-text">Xây dựng cấu hình</p>
-                            </div>
+                            <a href="http://localhost/nguyencongpc/DonHang/ShowByEmail" class="header__main-options-item header__cart">
+                                <i class="header__main-options-icon fa-solid fa-money-bill"></i>
+                                <p class="header__main-options-text">Đơn hàng đã đặt</p>                                                        
+                                <span class="header__cart-count" style="top: -7px; right: 40px;">
+                                    <?php echo $data["SLDH"]?>
+                                </span>
+                            </a>
                             <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>
                                 <span class="header__cart-count">
-                                    <?php echo $data["tongSl"]?>                               
+                                    <?php echo $data["SLSP"]?>
                                 </span>
                             </a>
 
@@ -210,15 +213,18 @@
                                 <i class="header__main-options-icon fa-solid fa-gift"></i>
                                 <p class="header__main-options-text">Khuyến mại</p>
                             </div>
-                            <div  class="header__main-options-item" onclick="showInfoToast();">
-                                <i class="header__main-options-icon fa-solid fa-desktop"></i>
-                                <p class="header__main-options-text">Xây dựng cấu hình</p>
-                            </div>
+                            <a href="http://localhost/nguyencongpc/DonHang/ShowByEmail" class="header__main-options-item">
+                                <i class="header__main-options-icon fa-solid fa-money-bill"></i>
+                                <p class="header__main-options-text">Đơn hàng đã đặt</p>
+                                <span class="header__cart-count" style="top: -7px; right: 40px;">
+                                    <?php echo $data["SLDH"]?>
+                                </span>
+                            </a>
                             <a href="http://localhost/nguyencongpc/GioHang" class="header__main-options-item header__cart">
                                 <i class="header__main-options-icon fa-solid fa-cart-arrow-down"></i>
                                 <p class="header__main-options-text">Giỏ hàng</p>
                                 <span class="header__cart-count">
-                                    <?php echo $data["tongSl"]?>
+                                    <?php echo $data["SLSP"]?>
                                 </span>
                             </a>
                         </div>

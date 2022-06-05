@@ -60,6 +60,7 @@
     border: 1px solid transparent;
     border-radius: 4px;
     margin-right: 1px;
+    cursor: pointer;
 }
 
 .login__form-submit-link {
@@ -95,6 +96,7 @@
     border-radius: 4px;
     overflow: hidden;
     margin: 0 10px;
+    cursor: pointer;
 }
 
 .login__form-social-icon {

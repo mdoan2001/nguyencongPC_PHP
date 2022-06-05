@@ -5,6 +5,7 @@ class GioHang extends Controller{
     private $nsx = array();
     private $cartModel;
     private $soLuongSanPham;
+    private $soLuongDonhang;
     private $loaiTaiKhoan;
 
     public function __construct()
@@ -30,11 +31,17 @@ class GioHang extends Controller{
             $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
             $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
 
-
+            //Lấy số lượng sản phẩm trong giỏ hàng
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $sl = mysqli_fetch_assoc($soLuongSanPham);
             $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
+
+            //Lấy số lượng đơn hàng đã đặt
+            $orderModel = $this->model("DonHangModel");      
+            $soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
+            $sl = mysqli_fetch_assoc($soLuongDonHang);
+            $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
         }
         else{
             $this->soLuongSanPham = 0 ;
@@ -62,17 +69,19 @@ class GioHang extends Controller{
             "page"=>"cart",
             "nsx"=>$this->nsx,
             "array"=>$array,
-            "tongSl"=>$this->soLuongSanPham,
+            "SLSP"=>$this->soLuongSanPham,
+            "SLDH"=>$this->soLuongDonhang,
             "tongTien"=>$tongTien,
             "title"=>"Thông tin giỏ hàng"
-
-        ]);
-                
+        ]);                
     }
+
+   
+
     public function themGioHang($maSanPham){
         $num1 = $this->cartModel->checkMaSanPham($maSanPham);
         $num2 = $this->cartModel->checkEmail($_SESSION["email"]);
-        if(!($num1 == 0 && $num2 == 0)){
+        if(($num1 == 0 && $num2 == 0) || ($num1 == 0 && $num2 > 0)){
             $this->cartModel->Insert($_SESSION["email"], $maSanPham, 1);
             header('Location: http://localhost/nguyencongpc/GioHang');                        
         }

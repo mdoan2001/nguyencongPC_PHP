@@ -56,7 +56,7 @@
 
 
         <!-- ĐẶT HÀNG -->
-        <form action="http://localhost/nguyencongpc/DonHang" method="POST" class="content__order">
+        <form action="http://localhost/nguyencongpc/DonHang/DatHang" method="POST" class="content__order">
             <input name="ngayMua" type="hidden" value="<?php echo  date("Y-m-d "); ?>">
             <div class="content__order-col">
                 <div class="content__order-tittle">THÔNG TIN NGƯỜI MUA</div>

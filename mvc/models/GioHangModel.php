@@ -25,7 +25,7 @@ class GioHangModel extends DB{
         
     }
     public function checkMaSanPham($maSanPham){
-        $qr = "SELECT maSanPham FROM giohang WHERE masanpham = $maSanPham";
+        $qr = "SELECT maSanPham FROM giohang WHERE masanpham = '$maSanPham'";
         $result = mysqli_query($this->con, $qr);
         return mysqli_num_rows($result);
     }

@@ -312,6 +312,7 @@ span.orange {
     text-align: center;
     text-decoration: none;
     color: var(--color-text);
+    cursor: pointer;
 }
 
 .header__cart {

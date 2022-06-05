@@ -6,6 +6,14 @@ class ChiTietDonHangModel extends DB{
         $qr = "INSERT INTO `chitietdonhang` (`id`, `maDonHang`, `maSanPham`, `soLuong`, `tongTien`) VALUES (NULL, '$maDonHang', '$maSanPham', '$soLuong', '$tongTien');";
         return mysqli_query($this->con, $qr);
     }
+    public function GetCTDHByMaDonHang($maDonHang){
+        $qr = "SELECT * FROM `chitietdonhang` INNER JOIN `sanpham` ON `chitietdonhang`.`maSanPham` = `sanpham`.`id` WHERE maDonHang = $maDonHang;";
+        return mysqli_query($this->con, $qr);
+    }
+    public function DeleteCTDHByMaDonHang($maDonHang){
+        $qr = "DELETE FROM `chitietdonhang` WHERE `maDonHang` = '$maDonHang'";
+        return mysqli_query($this->con, $qr);
+    }
 }
 
 ?>

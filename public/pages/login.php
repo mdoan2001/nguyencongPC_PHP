@@ -22,18 +22,18 @@
                     </div>
                 </div>
                 <div class="login__form-social">
-                    <a href="#" class="login__form-social-item login__form-social-item--gg" onclick="showInfoToast();">
+                    <div class="login__form-social-item login__form-social-item--gg" onclick="showInfoToast();">
                         <div class="login__form-social-icon">
                             <i class="fa-brands fa-google"></i>
                         </div>
                         <div class="login__form-social-text">Đăng nhập bằng Google</div>
-                    </a>
-                    <a href="#" class="login__form-social-item login__form-social-item--fb" onclick="showInfoToast();">
+                    </div>
+                    <div class="login__form-social-item login__form-social-item--fb" onclick="showInfoToast();">
                         <div class="login__form-social-icon">
                             <i class="fa-brands fa-facebook-f"></i>
                         </div>
                         <div class="login__form-social-text">Đăng nhập bằng Facebook</div>
-                    </a>
+                    </div>
                 </div>
             </form>
             <div class="login__right">

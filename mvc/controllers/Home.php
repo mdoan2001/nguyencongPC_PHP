@@ -5,6 +5,7 @@ class Home extends Controller{
     private $nsxModel;
     private $nsx = array();
     private $soLuongSanPham;
+    private $soLuongDonHang;
     private $loaiTaiKhoan;
     public function __construct()
     {
@@ -29,11 +30,17 @@ class Home extends Controller{
             $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
             $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
 
-
+            //Lấy số lượng sản phẩm trong giỏ hàng
             $cartModel = $this->model("GioHangModel");      
             $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
             $sl = mysqli_fetch_assoc($soLuongSanPham);
             $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
+
+            //Lấy số lượng đơn hàng đã đặt
+            $orderModel = $this->model("DonHangModel");      
+            $soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
+            $sl = mysqli_fetch_assoc($soLuongDonHang);
+            $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
         }
         else{
             $this->soLuongSanPham = 0 ;
@@ -65,7 +72,8 @@ class Home extends Controller{
                 "array"=>$arr1,
                 "nsx"=>$this->nsx,
                 "title"=>"Máy tính Nguyễn Công",
-                "tongSl"=>$this->soLuongSanPham
+                "SLSP"=>$this->soLuongSanPham,
+                "SLDH"=>$this->soLuongDonHang
             ]);
         }
                 
