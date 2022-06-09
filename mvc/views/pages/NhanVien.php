@@ -36,13 +36,14 @@
 
                     <?php
                     for($i=0; $i<count($data["nv"]); $i++){
-                        $id = $data["nv"][$i]["id"];
-                        $hoTen = $data["nv"][$i]["hoTen"];
-                        $hinhAnh = $data["nv"][$i]["hinhAnh"];
-                        $gioiTinh = $data["nv"][$i]["gioiTinh"]=="0"?"Nam":"Nữ";
-                        $email = $data["nv"][$i]["email"];
-                        $diaChi = $data["nv"][$i]["diaChi"];
-                        $SDT = $data["nv"][$i]["SDT"];
+                        $item = $data["nv"][$i];
+                        $id = $item->id;
+                        $hoTen = $item->hoTen;
+                        $hinhAnh = $item->hinhAnh;
+                        $gioiTinh = $item->gioiTinh=="0"?"Nam":"Nữ";
+                        $email = $item->email;
+                        $diaChi = $item->diaChi;
+                        $SDT = $item->SDT;
                         
                     ?>
                         <td>NV0<?php echo $id?></td>

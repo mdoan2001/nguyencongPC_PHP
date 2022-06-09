@@ -9,8 +9,6 @@ class DonHang extends Controller{
     private $soLuongDonHang;
     private $loaiTaiKhoan;
     private $tongTien;
-    private $array = array();
-
     public function __construct()
     {
         //Kiem tra dang nhap
@@ -23,32 +21,27 @@ class DonHang extends Controller{
         
         
 
-        $this->nsxModel = $this->model("NSXModel");
         // NSX
-        $list = $this->nsxModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nsx, $item);
-        }
+        $this->nsxModel = $this->model("NSXModel");
+        $this->nsx = json_decode($this->nsxModel->GetList());
 
 
         if(!empty($_SESSION["email"])){
             //get loai tai khoan
             $modelUser = $this->model("UsersModel");
-            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
-            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
-            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+            $this->loaiTaiKhoan = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
 
             //Lấy số lượng sản phẩm trong giỏ hàng
             $cartModel = $this->model("GioHangModel");      
-            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
+            $this->soLuongSanPham= $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            if($this->soLuongSanPham == null)
+                $this->soLuongSanPham = 0;
 
             //Lấy số lượng đơn hàng đã đặt
             $orderModel = $this->model("DonHangModel");      
-            $soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongDonHang);
-            $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
+            $this->soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
+            if($this->soLuongDonHang == null)
+                $this->soLuongDonHang = 0;
         }
         else{
             $this->soLuongDonHang =0;
@@ -56,14 +49,11 @@ class DonHang extends Controller{
             $this->loaiTaiKhoan = 1;
         }
 
-        $cart = $this->cartModel->ShowbyEmail($_SESSION["email"]);
-        while($item = mysqli_fetch_assoc($cart)){
-            array_push($this->array, $item);
-        }
+        $array = json_decode($this->cartModel->ShowbyEmail($_SESSION["email"]));
         $this->tongTien =0;
 
-        for($i=0; $i<count($this->array); $i++){
-            $this->tongTien += $this->array[$i]["gia"] * $this->array[$i]["soLuong"];
+        for($i=0; $i<count($array); $i++){
+            $this->tongTien += $array[$i]->gia * $array[$i]->soLuong;
         }
         
     }
@@ -88,15 +78,13 @@ class DonHang extends Controller{
                 $this->orderModel->Insert($email, $hoTen, $SDT, $ngayMua, $diaChi, $ghiChu);
     
                 // Lấy ID đơn hàng
-                $order = $this->orderModel->GetLastID();
-                $lastID = mysqli_fetch_assoc($order);
-                $maDonHang = $lastID["id"];
+                $maDonHang = $this->orderModel->GetLastID();
     
                 // Thêm chi tiết đơn hàng
                 for($i=0; $i<count($this->array); $i++){
-                    $maSanPham = $this->array[$i]["maSanPham"];
-                    $soLuong = $this->array[$i]["soLuong"];
-                    $gia = $this->array[$i]["gia"];
+                    $maSanPham = $this->array[$i]->maSanPham;
+                    $soLuong = $this->array[$i]->soLuong;
+                    $gia = $this->array[$i]->gia;
                     $tien = $gia * $soLuong;
     
                     $chiTietDonHangModel->Insert($maDonHang, $maSanPham, $soLuong, $tien);
@@ -114,24 +102,12 @@ class DonHang extends Controller{
     public function Show(){    
         if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
             // Lấy ID đơn hàng
-            $order = $this->orderModel->GetLastID();
-            $lastID = mysqli_fetch_assoc($order);
-            $maDonHang = $lastID["id"];
+            $maDonHang = $this->orderModel->GetLastID();
+            $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
 
-            $array = array();
-
-            $result = $this->orderModel->GetDonHangByID($maDonHang);
-            while($item = mysqli_fetch_assoc($result)){
-                array_push($array, $item);
-            }
-
-
-            $array1 = array();
             $ctdh = $this->model("ChiTietDonHangModel");
-            $result = $ctdh->GetCTDHByMaDonHang($maDonHang);
-            while($item = mysqli_fetch_assoc($result)){
-                array_push($array1, $item);
-            }      
+            $array1 = json_decode($ctdh->GetCTDHByMaDonHang($maDonHang));
+                 
             // CART
 
             if($this->loaiTaiKhoan == 1){
@@ -143,7 +119,7 @@ class DonHang extends Controller{
                     "tongTien"=>$this->tongTien,
                     "title"=>"Chi tiết đơn hàng",
                     "array"=>$array1,
-                    "content"=>$array[0],
+                    "content"=>$array,
                     "lastID"=>$maDonHang
                 ]);
             }
@@ -163,20 +139,12 @@ class DonHang extends Controller{
 
 
         if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
-            $array = array();
-
-            $result = $this->orderModel->GetDonHangByID($maDonHang);
-            while($item = mysqli_fetch_assoc($result)){
-                array_push($array, $item);
-            }
+            
+            $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
 
 
-            $array1 = array();
             $ctdh = $this->model("ChiTietDonHangModel");
-            $result = $ctdh->GetCTDHByMaDonHang($maDonHang);
-            while($item = mysqli_fetch_assoc($result)){
-                array_push($array1, $item);
-            }      
+            $array1 = json_decode($ctdh->GetCTDHByMaDonHang($maDonHang));
             // CART
 
             if($this->loaiTaiKhoan == 1){
@@ -188,7 +156,7 @@ class DonHang extends Controller{
                     "tongTien"=>$this->tongTien,
                     "title"=>"Chi tiết đơn hàng",
                     "array"=>$array1,
-                    "content"=>$array[0],
+                    "content"=>$array,
                     "lastID"=>$maDonHang
                 ]);
             }
@@ -203,12 +171,8 @@ class DonHang extends Controller{
                     
     }
     public function ShowByEmail(){
-        $array = array();
-        $result =  $this->orderModel->getListByEmail($_SESSION["email"]);
 
-        while($item = mysqli_fetch_assoc(($result))){
-            array_push($array, $item);
-        }
+        $array = json_decode($this->orderModel->GetListByEmail($_SESSION["email"]));
 
         if($_SESSION["isLogin"]==1 &&  $this->loaiTaiKhoan == 1){
             $this->view("user", "Layout",[
@@ -225,9 +189,7 @@ class DonHang extends Controller{
         }
 
 
-        // echo '<pre>';
-        //     print_r($array);
-        // echo '</pre>';
+
 
 
 
@@ -237,9 +199,7 @@ class DonHang extends Controller{
         if($_SESSION["isLogin"]==1 &&  $this->loaiTaiKhoan == 1){
 
             // Lấy ID đơn hàng
-            $order = $this->orderModel->GetLastID();
-            $lastID = mysqli_fetch_assoc($order);
-            $maDonHang = $lastID["id"];
+            $maDonHang = $this->orderModel->GetLastID();
     
             $this->model("ChiTietDonHangModel")->DeleteCTDHByMaDonHang($maDonHang);
             $this->orderModel->DeleteDHByMaDonHang($maDonHang);

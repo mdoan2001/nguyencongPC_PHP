@@ -18,31 +18,27 @@ class GioHang extends Controller{
 
         $this->cartModel = $this->model("GioHangModel");
         
-        $this->nsxModel = $this->model("NSXModel");
         // NSX
-        $list = $this->nsxModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nsx, $item);
-        }
+        $this->nsxModel = $this->model("NSXModel");
+        $this->nsx = json_decode($this->nsxModel->GetList());
+
 
         if(!empty($_SESSION["email"])){
             //get loai tai khoan
             $modelUser = $this->model("UsersModel");
-            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
-            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
-            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+            $this->loaiTaiKhoan = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
 
             //Lấy số lượng sản phẩm trong giỏ hàng
             $cartModel = $this->model("GioHangModel");      
-            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
+            $this->soLuongSanPham= $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            if($this->soLuongSanPham == null)
+                $this->soLuongSanPham = 0;
 
             //Lấy số lượng đơn hàng đã đặt
             $orderModel = $this->model("DonHangModel");      
-            $soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongDonHang);
-            $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
+            $this->soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
+            if($this->soLuongDonHang == null )
+                $this->soLuongDonHang = 0;
         }
         else{
             $this->soLuongDonHang =0;
@@ -50,20 +46,19 @@ class GioHang extends Controller{
             $this->loaiTaiKhoan = 1;
         }
         
+
+        
+        
     }
 
     public function Show(){
         
-        $cart = $this->cartModel->ShowbyEmail($_SESSION["email"]);
-
-        $array = array();
-        while($item = mysqli_fetch_assoc($cart)){
-            array_push($array, $item);
-        }
+        $array = json_decode($this->cartModel->ShowbyEmail($_SESSION["email"]));
+        
         $tongTien =0;
 
         for($i=0; $i<count($array); $i++){
-            $tongTien += $array[$i]["gia"] * $array[$i]["soLuong"];
+            $tongTien += $array[$i]->gia* $array[$i]->soLuong;
         }
         
 
@@ -73,7 +68,7 @@ class GioHang extends Controller{
                 "nsx"=>$this->nsx,
                 "array"=>$array,
                 "SLSP"=>$this->soLuongSanPham,
-                "SLDH"=>$this->soLuongDonhang,
+                "SLDH"=>$this->soLuongDonHang,
                 "tongTien"=>$tongTien,
                 "title"=>"Thông tin giỏ hàng"
             ]);  
@@ -81,7 +76,10 @@ class GioHang extends Controller{
         else{
             header('Location: http://localhost/nguyencongpc/GioHang');                        
 
-        }      
+        }   
+        
+        
+
     }
 
    
@@ -126,8 +124,6 @@ class GioHang extends Controller{
             //Kiểm tra số lượng có phải 0 
             //Nếu là 0 thì xóa khỏi giỏ hàng
             $soLuong = $this->cartModel->getSoLuongByMaSanPham($maSanPham);
-            $soLuong = mysqli_fetch_assoc($soLuong);
-            $soLuong = $soLuong["soLuong"];
             if($soLuong >1){
                 $this->cartModel->giamSoLuong($_SESSION["email"],$maSanPham);
                 header('Location: http://localhost/nguyencongpc/GioHang'); 

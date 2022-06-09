@@ -1,9 +1,9 @@
 <?php
 $id = $ten = "";
 
-if (isset($data["des"]["id"]) && isset($data["des"]["tenNSX"])) {
-    $id = $data["des"]["id"];
-    $ten = $data["des"]["tenNSX"];
+if (isset($data["des"]->id) && isset($data["des"]->tenNSX)) {
+    $id = $data["des"]->id;
+    $ten = $data["des"]->tenNSX;
 }
 
 ?>

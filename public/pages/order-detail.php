@@ -13,32 +13,32 @@
 
                 <div class="content__order-item">
                     <label class="content__order-label">Ngày đặt hàng</label>
-                    <input type="text" class="content__order-input" value="<?php echo $data['content']['ngayMua'] ?>" disabled>
+                    <input type="text" class="content__order-input" value="<?php echo $data['content']->ngayMua ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Họ tên*</label>
-                    <input type="text" class="content__order-input" value="<?php echo $data['content']['hoTen'] ?>" disabled>
+                    <input type="text" class="content__order-input" value="<?php echo $data['content']->hoTen ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">SĐT*</label>
-                    <input type="text" class="content__order-input" value="<?php echo $data['content']['SDT'] ?>" disabled>
+                    <input type="text" class="content__order-input" value="<?php echo $data['content']->SDT ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Email*</label>
-                    <input class="content__order-input" value="<?php echo $data['content']['email'] ?>" disabled>
+                    <input class="content__order-input" value="<?php echo $data['content']->email ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Địa chỉ*</label>
-                    <input type="text" class="content__order-input" value="<?php echo $data['content']['diaChi'] ?>" disabled>
+                    <input type="text" class="content__order-input" value="<?php echo $data['content']->diaChi ?>" disabled>
                 </div>
 
                 <div class="content__order-item">
                     <label class="content__order-label">Ghi chú</label>
-                    <textarea id="" disabled cols="30" rows="10" class="content__order-tarea"><?php echo $data['content']['ghiChu'] ?></textarea>
+                    <textarea id="" disabled cols="30" rows="10" class="content__order-tarea"><?php echo $data['content']->ghiChu ?></textarea>
                 </div>
             </div>
             <div class="content__order-col">
@@ -105,10 +105,10 @@
         <?php foreach($data["array"] as $key =>$value){?>
 
         <div class="content__product">
-            <img src="<?php echo $value["hinhAnh"]?>" alt="" class="content__product-img">
+            <img src="<?php echo $value->hinhAnh?>" alt="" class="content__product-img">
             <div class="content__product-des">
                 <div class="content__product-name">
-                    <?php echo $value["tenSanPham"]?>
+                    <?php echo $value->tenSanPham?>
                 </div>
                 <p class="content__product-text content__product-text--red">
                     Khuyến mại
@@ -121,11 +121,11 @@
                 <p class="content__product-text"> + Giảm 10% khi mua thêm RAM, HDD laptop </p>
                 <p class="content__product-text"> + Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop </p>
             </div>
-            <div class="content__product-price"><?php echo number_format($value["gia"])?>đ</div>
+            <div class="content__product-price"><?php echo number_format($value->gia)?>đ</div>
             <div class="content__product-quantity">
-                <div style="padding-left: 50px;" class="content__product-quantity-text"><?php echo $value["soLuong"]?></div>
+                <div style="padding-left: 50px;" class="content__product-quantity-text"><?php echo $value->soLuong?></div>
             </div>
-            <div class="content__product-money"><?php echo  number_format($value["gia"] * $value["soLuong"])?>đ</div>
+            <div class="content__product-money"><?php echo  number_format($value->gia * $value->soLuong)?>đ</div>
             <div class="content__product-remove">
                 <i href="" class="fa-solid fa-trash-can content__product-remove-icon"></i>
             </div>

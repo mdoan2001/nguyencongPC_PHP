@@ -5,11 +5,12 @@
                 <ul class="navbar__list">
                     <?php
                     for ($i = 0; $i < count($data["nsx"]); $i++) {
+                        $item = $data["nsx"][$i];
                         echo '
                             <li class="navbar__item">
-                                <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$data["nsx"][$i]["id"].'" class="navbar__link">
+                                <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$item->id.'" class="navbar__link">
                                     <i class="navbar__icon fa-solid fa-laptop"></i>
-                                    <p class="navbar__name">LAPTOP - ' . $data["nsx"][$i]["tenNSX"] . '</p>
+                                    <p class="navbar__name">LAPTOP - ' . $item->tenNSX . '</p>
                                 </a>
                             </li>
                         ';
@@ -101,16 +102,16 @@
                         for($i=0; $i<count($data["array"]["DELL"]); $i++){      
                             $item = $data["array"]["DELL"][$i];           
                         ?>
-                            <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php echo $item["id"]?>" class="content__product-item">
-                                <img src="<?php echo $item["hinhAnh"]?>" alt="" class="content__product-img">
+                            <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php echo $item->id?>" class="content__product-item">
+                                <img src="<?php echo $item->hinhAnh?>" alt="" class="content__product-img">
                                 <div class="content__product-save">
-                                    Tiết kiệm <span><?php echo number_format($item["gia"]*0.1);?>đ</span>
+                                    Tiết kiệm <span><?php echo number_format($item->gia*0.1);?>đ</span>
                                 </div>
-                                <div class="content__product-name"><?php echo $item["tenSanPham"]?></div>
+                                <div class="content__product-name"><?php echo $item->tenSanPham?></div>
                                 <div class="content__product-bot">
                                     <div class="content__product-price">
-                                        <div class="content__product-price-new"><?php echo number_format($item["gia"]) ." đ"?></div>
-                                        <div class="content__product-price-old"><del><?php echo number_format($item["gia"] + $item["gia"]*0.1) ." đ"?></del><span>-10%</span></div>
+                                        <div class="content__product-price-new"><?php echo number_format($item->gia) ." đ"?></div>
+                                        <div class="content__product-price-old"><del><?php echo number_format($item->gia + $item->gia*0.1) ." đ"?></del><span>-10%</span></div>
                                     </div>
                                     <div class="content__product-card">
                                         <i class="content__product-icon fa-solid fa-cart-arrow-down"></i>
@@ -148,7 +149,7 @@
                 <h1 class="content__product-title">
                     LAPTOP - <?php  echo $key?>
                 </h1>
-                <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/<?php echo $value[0]["maNSX"];?>" class="content__product-link">Xem tất cả>></a>
+                <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/<?php echo $value[0]->maNSX;?>" class="content__product-link">Xem tất cả>></a>
             </div>
             <div class="content__product-list">
                     <?php
@@ -157,16 +158,16 @@
                               
                             $item = $data["array"][$key][$i];           
                         ?>
-                            <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php echo $item["id"]?>" class="content__product-item">
-                                <img src="<?php echo $item["hinhAnh"]?>" alt="" class="content__product-img">
+                            <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php echo $item->id?>" class="content__product-item">
+                                <img src="<?php echo $item->hinhAnh?>" alt="" class="content__product-img">
                                 <div class="content__product-save">
-                                    Tiết kiệm <span><?php echo number_format($item["gia"]*0.1);?>đ</span>
+                                    Tiết kiệm <span><?php echo number_format($item->gia*0.1);?>đ</span>
                                 </div>
-                                <div class="content__product-name"><?php  echo $item["tenSanPham"]?></div>
+                                <div class="content__product-name"><?php  echo $item->tenSanPham?></div>
                                 <div class="content__product-bot">
                                     <div class="content__product-price">
-                                        <div class="content__product-price-new"><?php echo number_format($item["gia"]) ." đ"?></div>
-                                        <div class="content__product-price-old"><del><?php echo number_format($item["gia"] + $item["gia"]*0.1) ."đ"?></del><span>-10%</span></div>
+                                        <div class="content__product-price-new"><?php echo number_format($item->gia) ." đ"?></div>
+                                        <div class="content__product-price-old"><del><?php echo number_format($item->gia + $item->gia*0.1) ."đ"?></del><span>-10%</span></div>
                                     </div>
                                     <div class="content__product-card">
                                         <i class="content__product-icon fa-solid fa-cart-arrow-down"></i>

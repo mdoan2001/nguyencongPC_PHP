@@ -33,15 +33,16 @@
                 <tbody>
                     <?php
                     for($i=0; $i<count($data["array"]); $i++){
+                        $item = $data["array"][$i];
                         echo '
                         <tr>
-                            <td>SP0'.$data["array"][$i]["id"].'</td>
-                            <td>'.$data["array"][$i]["tenSanPham"].'</td>
-                            <td>'.$data["array"][$i]["tenNSX"].'</td>
-                            <td><img src="'.$data["array"][$i]["hinhAnh"].'" alt="" width="100px"></td>
-                            <td>'.$data["array"][$i]["soLuong"].'</td>
-                            <td>'.$data["array"][$i]["gia"].'</td>
-                            <td><a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/'.$data["array"][$i]["id"].'">Sửa</a>&nbsp;<a href="http://localhost/nguyencongpc/SanPham/DeleteById/'.$data["array"][$i]["id"].'">Xóa</a></td>
+                            <td>SP0'.$item->id.'</td>
+                            <td>'.$item->tenSanPham.'</td>
+                            <td>'.$item->tenNSX.'</td>
+                            <td><img src="'.$item->hinhAnh.'" alt="" width="100px"></td>
+                            <td>'.$item->soLuong.'</td>
+                            <td>'.$item->gia.'</td>
+                            <td><a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/'.$item->id.'">Sửa</a>&nbsp;<a href="http://localhost/nguyencongpc/SanPham/DeleteById/'.$item->id.'">Xóa</a></td>
                         </tr>
                         ';
                         

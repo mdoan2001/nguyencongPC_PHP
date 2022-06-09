@@ -13,12 +13,12 @@ $item = $data["array"];
     <div class="grid wide">
         <div class="content__head">
             <h1 class="content__tittle">
-                <?php echo $item["tenSanPham"]?>
+                <?php echo $item->tenSanPham?>
             </h1>
             <div class="content__inf">
 
                 <div class="content__inf-item content__inf-item--after">
-                    Mã SP: <span class="content__inf-span">SP<?php echo $item["id"]?></span>
+                    Mã SP: <span class="content__inf-span">SP<?php echo $item->id?></span>
                 </div>
                 <div class="content__inf-item content__inf-item--after">
                     Đánh giá:&nbsp;
@@ -53,7 +53,7 @@ $item = $data["array"];
 
         <div class="content__main">
             <div class="content__main-left">
-                <img src="<?php echo $item["hinhAnh"]?>" alt="" class="content__main-bigimg">
+                <img src="<?php echo $item->hinhAnh?>" alt="" class="content__main-bigimg">
                 <div class="content__main-left-list">
                     <div class="content__main-left-item content__main-left-item--active">
                         <img src="./public/assets/img/product/3.jpg" alt="" class="content__main-left-smallimg">
@@ -84,13 +84,13 @@ $item = $data["array"];
                 <div class="content__main-price">
                     <div class="content__main-price-item">
                         <div class="content__main-price-label">Giá bán:</div>
-                        <div class="content__main-price-del"><?php echo number_format($item["gia"] + $item["gia"]*0.1)?>đ</div>
+                        <div class="content__main-price-del"><?php echo number_format($item->gia + $item->gia*0.1)?>đ</div>
                     </div>
                     <div class="content__main-price-item">
                         <div class="content__main-price-label">Giá khuyến mại:</div>
                         <div class="content__main-price-now">
-                            <?php echo number_format($item["gia"])?>đ
-                            <span class="content__main-price-sale">(Tiết kiệm <?php echo number_format($item["gia"] *0.1)?>đ)</span>
+                            <?php echo number_format($item->gia)?>đ
+                            <span class="content__main-price-sale">(Tiết kiệm <?php echo number_format($item->gia *0.1)?>đ)</span>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ $item = $data["array"];
                     <p class="content__main-offer-text">+ Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop</p>
                 </div>
                 <div class="content__main-buy">
-                    <a href="http://localhost/nguyencongpc/GioHang/themGioHang/<?php echo $item["id"]?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
+                    <a href="http://localhost/nguyencongpc/GioHang/themGioHang/<?php echo $item->id?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
                         <h1>ĐẶT MUA NGAY</h1>
                         <p>Giao hàng tận nơi nhanh chóng</p>
                     </a>
@@ -159,7 +159,7 @@ $item = $data["array"];
                 <h1 class="content__des-tittle content__des-tittle--active">
                     ĐẶC ĐIỂM
                 </h1>
-                <h1 class="content__des-name"><?php echo $item["tenSanPham"]?></h1>
+                <h1 class="content__des-name"><?php echo $item->tenSanPham?></h1>
                 <p class="content__des-text">
                     <b>Laptop Dell Latitude 3410 (70216823)</b> được thiết kế đơn giản, sang trọng với vỏ ngoài được phủ sơn màu đen và các cạnh bên được vát mỏng, các đường nét góc cạnh được bo tròn gọn gàng, mặt lưng trơn in nổi logo. Ngoài
                     tính thẩm mĩ, nó cũng đảm bảo độ bền bỉ, chắc chắn và tính di động để có thể đồng hành với bạn trong mọi hành trình lâu dài. Khung máy chắc chắn, bền bỉ giúp bảo vệ linh kiện tối đa trước tác động bên ngoài.
@@ -205,25 +205,25 @@ $item = $data["array"];
                     <tr>
                         <td>CPU</td>
                         <td>
-                            <?php echo $item["CPU"];?>
+                            <?php echo $item->CPU;?>
                         </td>
                     </tr>
                     <tr>
                         <td>VGA</td>
                         <td>
-                            <?php echo $item["VGA"];?>
+                            <?php echo $item->VGA;?>
                         </td>
                     </tr>
                     <tr>
                         <td>Bộ nhớ</td>
                         <td>
-                             <?php echo $item["RAM"];?>
+                             <?php echo $item->RAM;?>
                         </td>
                     </tr>
                     <tr>
                         <td>Ổ cứng</td>
                         <td>
-                            <?php echo $item["dungLuong"];?>
+                            <?php echo $item->dungLuong;?>
                         </td>
                     </tr>>
                     <tr>
@@ -245,13 +245,13 @@ $item = $data["array"];
                     <tr>
                         <td>Trọng lượng</td>
                         <td>
-                            <?php echo $item["trongLuong"];?>
+                            <?php echo $item->trongLuong;?>
                         </td>
                     </tr>
                     <tr>
                         <td>Màu sắc</td>
                         <td>
-                            <?php echo $item["mauSac"];?>
+                            <?php echo $item->mauSac;?>
                         </td>
                     </tr>
                 </table>

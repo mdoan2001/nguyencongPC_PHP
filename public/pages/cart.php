@@ -24,10 +24,10 @@
         <?php foreach($data["array"] as $key =>$value){?>
 
         <div class="content__product">
-            <img src="<?php echo $value["hinhAnh"]?>" alt="" class="content__product-img">
+            <img src="<?php echo $value->hinhAnh?>" alt="" class="content__product-img">
             <div class="content__product-des">
                 <div class="content__product-name">
-                    <?php echo $value["tenSanPham"]?>
+                    <?php echo $value->tenSanPham?>
                 </div>
                 <p class="content__product-text content__product-text--red">
                     Khuyến mại
@@ -40,15 +40,15 @@
                 <p class="content__product-text"> + Giảm 10% khi mua thêm RAM, HDD laptop </p>
                 <p class="content__product-text"> + Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop </p>
             </div>
-            <div class="content__product-price"><?php echo number_format($value["gia"])?>đ</div>
+            <div class="content__product-price"><?php echo number_format($value->gia)?>đ</div>
             <div class="content__product-quantity">
-                <a href="http://localhost/nguyencongpc/GioHang/giamSoLuong/<?php echo $value["maSanPham"]?>" class="content__product-btn">-</a>
-                <div class="content__product-quantity-text"><?php echo $value["soLuong"]?></div>
-                <a href="http://localhost/nguyencongpc/GioHang/tangSoLuong/<?php echo $value["maSanPham"]?>" class="content__product-btn">+</a>
+                <a href="http://localhost/nguyencongpc/GioHang/giamSoLuong/<?php echo $value->maSanPham?>" class="content__product-btn">-</a>
+                <div class="content__product-quantity-text"><?php echo $value->soLuong?></div>
+                <a href="http://localhost/nguyencongpc/GioHang/tangSoLuong/<?php echo $value->maSanPham?>" class="content__product-btn">+</a>
             </div>
-            <div class="content__product-money"><?php echo  number_format($value["gia"] * $value["soLuong"])?>đ</div>
+            <div class="content__product-money"><?php echo  number_format($value->gia * $value->soLuong)?>đ</div>
             <div class="content__product-remove">
-                <a href="http://localhost/nguyencongpc/GioHang/Delete/<?php echo $value["maSanPham"]?>" class="fa-solid fa-trash-can content__product-remove-icon"></a>
+                <a href="http://localhost/nguyencongpc/GioHang/Delete/<?php echo $value->maSanPham?>" class="fa-solid fa-trash-can content__product-remove-icon"></a>
             </div>
         </div>
 

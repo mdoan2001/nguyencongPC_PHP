@@ -1,7 +1,7 @@
 <?php
 class KhachHang extends Controller{
     
-    private $nsxModel;
+    private $nsxModel, $UsersModel;
     private $nsx = array();
     private $soLuongSanPham;
     private $soLuongDonhang;
@@ -9,33 +9,28 @@ class KhachHang extends Controller{
 
     function __construct()
     {
-        $this->nsxModel = $this->model("NSXModel");
-
         // NSX
-        $list = $this->nsxModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nsx, $item);
-        }
+        $this->nsxModel = $this->model("NSXModel");
+        $this->nsx = json_decode($this->nsxModel->GetList());
+        $this->UsersModel = $this->model("UsersModel");
         
 
         if(!empty($_SESSION["email"])){
             //get loai tai khoan
             $modelUser = $this->model("UsersModel");
-            $modelUser = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
-            $this->loaiTaiKhoan = mysqli_fetch_assoc($modelUser);
-            $this->loaiTaiKhoan = $this->loaiTaiKhoan["loaiTaiKhoan"];
+            $this->loaiTaiKhoan = $modelUser->GetLoaiTaiKhoan($_SESSION["email"]);
 
             //Lấy số lượng sản phẩm trong giỏ hàng
             $cartModel = $this->model("GioHangModel");      
-            $soLuongSanPham = $cartModel->getSoLuongSanPham($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongSanPham);
-            $this->soLuongSanPham = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0;
+            $this->soLuongSanPham= $cartModel->getSoLuongSanPham($_SESSION["email"]);
+            if($this->soLuongSanPham == null)
+                $this->soLuongSanPham = 0;
 
             //Lấy số lượng đơn hàng đã đặt
             $orderModel = $this->model("DonHangModel");      
-            $soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
-            $sl = mysqli_fetch_assoc($soLuongDonHang);
-            $this->soLuongDonHang = ($sl["soLuong"]!=NULL)?$sl["soLuong"]:0; 
+            $this->soLuongDonHang = $orderModel->getSoLuongDonHang($_SESSION["email"]);
+            if($this->soLuongDonHang == null)
+                $this->soLuongDonHang = 0;
         }
         else{
             $this->soLuongDonHang =0;
@@ -45,14 +40,11 @@ class KhachHang extends Controller{
 
     }
 
-    public function Show(){
-        $UsersModel = $this->model("UsersModel");
-        $list = $UsersModel->GetList();
-        $users = array();
 
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($users, $item);
-        }
+    public function Show(){
+
+        $users = json_decode($this->UsersModel->GetList());
+
         if($this->loaiTaiKhoan == 0 ){
             $this->view("admin", "Layout", [
                 "page"=>"KhachHang",
@@ -68,9 +60,8 @@ class KhachHang extends Controller{
     
 
     public function ShowByEmail($email){
-        $UsersModel = $this->model("UsersModel");
-        $list = $UsersModel->GetUserByEmail($email);
-        $user = mysqli_fetch_assoc($list);
+
+        $user = json_decode($this->UsersModel->GetUserByEmail($email));
 
         if($this->loaiTaiKhoan == 0 && $_SESSION["isLogin"] == 1){
             $this->view("admin","Layout", [
@@ -108,9 +99,15 @@ class KhachHang extends Controller{
                 $diaChi = $_POST["diaChi"];
                 $SDT = $_POST["SDT"];
 
-                $UsersModel = $this->model("UsersModel");
-                $UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-                
+                $check = $this->UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
+                if($check == true){
+                    echo "alert('Thêm thành công')";
+                }
+                else{
+                    echo "alert('Thêm thất bại')";
+                }
+
+
                 if($this->loaiTaiKhoan == 0 ){
                     header('Location: http://localhost/nguyencongpc/KhachHang');
                 }
@@ -139,8 +136,14 @@ class KhachHang extends Controller{
                 $diaChi = $_POST["diaChi"];
                 $SDT = $_POST["SDT"];
 
-                $UsersModel = $this->model("UsersModel");
-                $UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
+                $check = $this->UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
+                if($check == true){
+                    echo "alert('Sửa thành công')";
+                }
+                else{
+                    echo "alert('Sửa thất bại')";
+                }
+
                 header('Location: http://localhost/nguyencongpc/KhachHang');
                 
             }
@@ -156,8 +159,14 @@ class KhachHang extends Controller{
     public function DeleteByEmail($id){
         if($_SESSION["isLogin"] == 1){
             if($this->loaiTaiKhoan == 0){
-                $UsersModel = $this->model("UsersModel");
-                $UsersModel->DeleteByEmail($id);
+                
+                $check = $this->UsersModel->DeleteByEmail($id);
+                if($check == true){
+                    echo "alert('Xóa thành công')";
+                }
+                else{
+                    echo "alert('Xóa thất bại')";
+                }
                 header('Location: http://localhost/nguyencongpc/KhachHang');
             }
             else{
@@ -178,7 +187,7 @@ class KhachHang extends Controller{
             "nsx"=>$this->nsx,
             "title"=>"Đăng nhập tài khoản",
             "SLSP"=>$this->soLuongSanPham,
-            "SLDH"=>$this->soLuongDonhang
+            "SLDH"=>$this->soLuongDonHang
         ]);
             
     }
@@ -188,7 +197,7 @@ class KhachHang extends Controller{
             "nsx"=>$this->nsx,
             "title"=>"Đăng ký tài khoản thành viên",
             "SLSP"=>$this->soLuongSanPham,
-            "SLDH"=>$this->soLuongDonhang
+            "SLDH"=>$this->soLuongDonHang
 
 
         ]);
@@ -212,16 +221,13 @@ class KhachHang extends Controller{
         if(isset($_POST["email"]) && isset($_POST["password"])){
            $email = $_POST["email"];
            $password = $_POST["password"];
+           $user = json_decode($this->UsersModel->GetUserByEmail($email));
 
-           $UsersModel = $this->model("UsersModel");
-           $list = $UsersModel->GetUserByEmail($email);
-           $user = mysqli_fetch_assoc($list);
-
-           if(password_verify($password, $user["matKhau"])==true){
+           if(password_verify($password, $user->matKhau)==true){
                 $_SESSION["isLogin"] = 1;
-                $_SESSION["loaiTaiKhoan"] = $user["loaiTaiKhoan"];
-                $_SESSION["email"] = $user["email"];
-                $_SESSION["hoTen"] = $user["hoTen"];
+                $_SESSION["loaiTaiKhoan"] = $user->loaiTaiKhoan;
+                $_SESSION["email"] = $user->email;
+                $_SESSION["hoTen"] = $user->hoTen;
                 header('Location: http://localhost/nguyencongpc/Home');   
        
            }

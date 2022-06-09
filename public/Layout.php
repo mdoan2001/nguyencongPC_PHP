@@ -179,11 +179,13 @@
                                     <ul class="navbar__list">
                                     <?php
                                         for($i=0; $i<count($data["nsx"]); $i++){
+                                            $item = $data["nsx"][$i];
+                                            echo $item->id . " - " . $item->tenNSX . "<br />";
                                             echo '
                                                 <li class="navbar__item">
-                                                    <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$data["nsx"][$i]["id"].'" class="navbar__link">
+                                                    <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$item->id.'" class="navbar__link">
                                                         <i class="navbar__icon fa-solid fa-laptop"></i>
-                                                        <p class="navbar__name">LAPTOP - '.$data["nsx"][$i]["tenNSX"].'</p>
+                                                        <p class="navbar__name">LAPTOP - '.$item->tenNSX.'</p>
                                                     </a>
                                                 </li>
                                             ';

@@ -11,7 +11,7 @@
 
                 <div class="content__filter-item">
                     <input type="checkbox" name="" class="content__filter-checkbox">
-                    <a href="" class="content__filter-link"><?php  echo $value["tenNSX"]?> (10) </a>
+                    <a href="" class="content__filter-link"><?php  echo $value->tenNSX?> (10) </a>
                 </div>
 
                 <?php }?>
@@ -232,17 +232,17 @@
 
                     ?>
 
-                    <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php  echo $value["id"]?>" class="content__product">
-                        <img src="<?php echo $value["hinhAnh"]?>" alt="" class="content__product-img">
+                    <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/<?php  echo $value->id?>" class="content__product">
+                        <img src="<?php echo $value->hinhAnh?>" alt="" class="content__product-img">
                         <div class="content__product-sale">
                             <p class="content__product-sale-tittle">Tiết kiệm: </p>
-                            <span class="content__product-sale-price"><?php echo number_format($value["gia"] * 0.1)?>đ</span>
+                            <span class="content__product-sale-price"><?php echo number_format($value->gia * 0.1)?>đ</span>
                         </div>
-                        <div class="content__product-name"><?php echo $value["tenSanPham"]?></div>
+                        <div class="content__product-name"><?php echo $value->tenSanPham?></div>
                         <div class="content__product-bot">
                             <div class="content__product-bot-left">
-                                <div class="content__product-price"><?php echo number_format($value["gia"])?>đ</div>
-                                <div class="content__product-del"><?php echo number_format($value["gia"] + $value["gia"] * 0.1 )?>đ</div>
+                                <div class="content__product-price"><?php echo number_format($value->gia)?>đ</div>
+                                <div class="content__product-del"><?php echo number_format($value->gia + $value->gia * 0.1 )?>đ</div>
                             </div>
                             <div class="content__product-cart">
                                 <i class="fa-solid fa-cart-arrow-down content__product-cart-icon"></i>

@@ -89,8 +89,9 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <?php
                                         for ($i = 0; $i < count($data["nsx"]); $i++) {
+                                            $item = $data["nsx"][$i];
                                             echo '
-                                                <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByNSX/' . $data["nsx"][$i]["id"] . '">' . $data["nsx"][$i]["tenNSX"] . '</a>
+                                                <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByNSX/' . $item->id . '">' . $item->tenNSX . '</a>
                                             ';
                                         }
                                         ?>

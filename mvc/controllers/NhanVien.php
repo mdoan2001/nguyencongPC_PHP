@@ -12,19 +12,13 @@ class NhanVien extends Controller{
             header('Location: http://localhost/nguyencongpc/');                                   
         }
 
-        $this->nsxModel= $this->model("NSXModel");
+        $this->nsxModel = $this->model("NSXModel");
         $this->nvModel = $this->model("NhanVienModel");
 
         // NSX
-        $list = $this->nsxModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nsx, $item);
-        }
+        $this->nsx = json_decode($this->nsxModel->GetList());
         // NV
-        $list = $this->nvModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nv, $item);
-        }
+        $this->nv = json_decode($this->nvModel->GetList());
     }
 
     public function Show(){
@@ -37,8 +31,7 @@ class NhanVien extends Controller{
     }
     public function ShowById($id){
 
-        $data = $this->nvModel->GetNhanVienById($id);
-        $nv = mysqli_fetch_assoc($data);
+        $nv = json_decode($this->nvModel->GetNhanVienById($id));
            
         $this->view("admin", "Layout", [
             "page"=>"ChiTietNhanVien",
@@ -62,7 +55,13 @@ class NhanVien extends Controller{
             $diaChi = $_POST["diaChi"];
             $SDT = $_POST["SDT"];
             $hinhAnh = $_POST["hinhAnh"];
-            $this->nvModel->Insert($hoTen, $email, $diaChi, $SDT, $hinhAnh, $gioiTinh);
+            $check = $this->nvModel->Insert($hoTen, $email, $diaChi, $SDT, $hinhAnh, $gioiTinh);
+            if($check == true){
+                echo "alert('Thêm thành công')";
+            }
+            else{
+                echo "alert('Thêm thất bại')";
+            }
             header('Location: http://localhost/nguyencongpc/NhanVien');
         }
         header('Location: http://localhost/nguyencongpc/NhanVien');
@@ -79,7 +78,13 @@ class NhanVien extends Controller{
             $diaChi = $_POST["diaChi"];
             $SDT = $_POST["SDT"];
             $hinhAnh = $_POST["hinhAnh"];
-            $this->nvModel->UpdateById($id, $hoTen, $email, $diaChi, $SDT, $hinhAnh, $gioiTinh);
+            $check = $this->nvModel->UpdateById($id, $hoTen, $email, $diaChi, $SDT, $hinhAnh, $gioiTinh);
+            if($check == true){
+                echo "alert('Update thành công')";
+            }
+            else{
+                echo "alert('Update thất bại)";
+            }
             header('Location: http://localhost/nguyencongpc/NhanVien');
 
         }
@@ -87,7 +92,13 @@ class NhanVien extends Controller{
         header('Location: http://localhost/nguyencongpc/NhanVien');
     }
     public function DeleteById($id){
-        $this->nvModel->DeleteById($id);
+        $check = $this->nvModel->DeleteById($id);
+        if($check == true){
+            echo "alert('Xóa thành công')";
+        }
+        else{
+            echo "alert('Xóa thất bại)";
+        }
         header('Location: http://localhost/nguyencongpc/NhanVien');
     }
 

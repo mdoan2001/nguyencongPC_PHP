@@ -21,7 +21,13 @@ class GioHangModel extends DB{
                 WHERE email = '$email'
                 GROUP BY giohang.maSanPham, tenSanPham";
 
-        return mysqli_query($this->con, $qr);
+
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result, $item);
+        }
+        return json_encode($result);
         
     }
     public function checkMaSanPham($maSanPham){
@@ -41,11 +47,15 @@ class GioHangModel extends DB{
     }
     public function getSoLuongSanPham($email){
         $qr = "SELECT SUM(soLuong) AS 'soLuong' FROM giohang WHERE email = '$email'";
-        return mysqli_query($this->con, $qr);
+        $row =  mysqli_query($this->con, $qr);
+        $result = mysqli_fetch_assoc($row);
+        return $result["soLuong"];
     }
     public function getSoLuongByMaSanPham($maSanPham){
         $qr = "SELECT soLuong FROM giohang WHERE maSanPham = $maSanPham";
-        return mysqli_query($this->con, $qr);
+        $row =  mysqli_query($this->con, $qr);
+        $result = mysqli_fetch_assoc($row);
+        return $result["soLuong"];
     }
     
 }

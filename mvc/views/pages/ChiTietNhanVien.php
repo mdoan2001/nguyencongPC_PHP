@@ -1,11 +1,11 @@
 <?php
-$id = $data["nv"]["id"];
-$hoTen = $data["nv"]["hoTen"];
-$email = $data["nv"]["email"];
-$diaChi = $data["nv"]["diaChi"];
-$gioiTinh = $data["nv"]["gioiTinh"];
-$SDT = $data["nv"]["SDT"];
-$hinhAnh = $data["nv"]["hinhAnh"];
+$id = $data["nv"]->id;
+$hoTen = $data["nv"]->hoTen;
+$email = $data["nv"]->email;
+$diaChi = $data["nv"]->diaChi;
+$gioiTinh = $data["nv"]->gioiTinh;
+$SDT = $data["nv"]->SDT;
+$hinhAnh = $data["nv"]->hinhAnh;
 
 ?>
 

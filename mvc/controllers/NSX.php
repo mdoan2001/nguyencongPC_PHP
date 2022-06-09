@@ -10,12 +10,9 @@ class NSX extends Controller{
             header('Location: http://localhost/nguyencongpc/');                                   
         }
         
-        $this->nsxModel = $this->model("NSXModel");
         // NSX
-        $list = $this->nsxModel->GetList();
-        while($item = mysqli_fetch_assoc($list)){
-            array_push($this->nsx, $item);
-        }
+        $this->nsxModel = $this->model("NSXModel");
+        $this->nsx = json_decode($this->nsxModel->GetList());
     }
 
     public function Show(){
@@ -30,8 +27,7 @@ class NSX extends Controller{
     public function ShowById($id){
 
         //CHI TIET NSX
-        $data = $this->nsxModel->GetNSXById($id);
-        $des = mysqli_fetch_assoc($data);
+        $des = json_decode($this->nsxModel->GetNSXById($id));
 
         //VIEW
         $this->view("admin","Layout", [
@@ -39,6 +35,8 @@ class NSX extends Controller{
             "nsx"=>$this->nsx,
             "des"=>$des
         ]);
+
+
     }
 
     public function ThemMoi(){
@@ -53,9 +51,9 @@ class NSX extends Controller{
         if(isset($_POST['ten'])){
             $ten = $_POST['ten'];
             $this->nsxModel->Insert($ten);
-            header('Location: http://localhost/nguyencongpc/NSX');
+             header('Location: http://localhost/nguyencongpc/NSX');
         }
-        header('Location: http://localhost/nguyencongpc/NSX');
+         header('Location: http://localhost/nguyencongpc/NSX');
     }
 
     public function UpdateById(){
@@ -65,6 +63,7 @@ class NSX extends Controller{
 
             $this->nsxModel->UpdateById($id, $ten);
             header('Location: http://localhost/nguyencongpc/NSX');
+
                  
         }
     }

@@ -1,4 +1,5 @@
 <?php
+
 class DonHangModel extends DB{
 
     public function GetListByEmail($email){
@@ -7,8 +8,12 @@ class DonHangModel extends DB{
                 ON donhang.id = chitietdonhang.maDonHang
                 WHERE email = '$email'
                 GROUP BY donhang.id";
-        return mysqli_query($this->con, $qr);
-
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result, $item);
+        }
+        return json_encode($result);
     }
 
     public function Insert($email, $hoTen, $SDT, $ngayMua, $diaChi, $ghiChu ){
@@ -17,20 +22,29 @@ class DonHangModel extends DB{
     }
     public function GetLastID(){
         $qr = "SELECT id FROM donhang  ORDER BY id DESC LIMIT 1";
-        return mysqli_query($this->con, $qr);
+        $row =  mysqli_query($this->con, $qr);
+        $result = mysqli_fetch_assoc($row);
+        return $result["id"];
     }
 
     function GetDonHangByID($id){
         $qr = "SELECT * FROM donhang WHERE id = '$id'";
-        return mysqli_query($this->con, $qr);
+        $row =  mysqli_query($this->con, $qr);
+        $result = mysqli_fetch_assoc($row);
+        return json_encode($result);
     }
+
     public function DeleteDHByMaDonHang($maDonHang){
         $qr = "DELETE FROM `donhang` WHERE `id` = '$maDonHang'";
         return mysqli_query($this->con, $qr);
+
     }
+    
     public function getSoLuongDonHang($email){
         $qr = "SELECT count(id) AS 'soLuong' FROM donhang WHERE email = '$email'";
-        return mysqli_query($this->con, $qr);
+        $row =  mysqli_query($this->con, $qr);
+        $result = mysqli_fetch_assoc($row);
+        return $result["soLuong"];
     }
 }
 

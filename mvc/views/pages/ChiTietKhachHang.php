@@ -1,10 +1,10 @@
 <?php
-$hoTen = $data["user"]["hoTen"];
-$email = $data["user"]["email"];
-$diaChi = $data["user"]["diaChi"];
-$loaiTaiKhoan = $data["user"]["loaiTaiKhoan"];
-$SDT = $data["user"]["SDT"];
-$matKhau = $data["user"]["matKhau"];
+$hoTen = $data["user"]->hoTen;
+$email = $data["user"]->email;
+$diaChi = $data["user"]->diaChi;
+$loaiTaiKhoan = $data["user"]->loaiTaiKhoan;
+$SDT = $data["user"]->SDT;
+$matKhau = $data["user"]->matKhau;
 
 ?>
 

@@ -33,12 +33,13 @@
                 <tbody>
                     <?php
                     for($i=0;$i<count($data["users"]); $i++){
-                        $email = $data["users"][$i]["email"];
-                        $hoTen = $data["users"][$i]["hoTen"];
-                        $matKhau = $data["users"][$i]["matKhau"];
-                        $loaiTaiKhoan = $data["users"][$i]["loaiTaiKhoan"];
-                        $diaChi = $data["users"][$i]["diaChi"];
-                        $SDT = $data["users"][$i]["SDT"];
+                        $item = $data["users"][$i];
+                        $email = $item->email;
+                        $hoTen = $item->hoTen;
+                        $matKhau = $item->matKhau;
+                        $loaiTaiKhoan = $item->loaiTaiKhoan;
+                        $diaChi = $item->diaChi;
+                        $SDT = $item->SDT;
                     ?>
 
                         <tr>

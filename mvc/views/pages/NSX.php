@@ -25,11 +25,12 @@
                 <tbody>
                     <?php
                     for($i=0; $i<count($data["nsx"]); $i++){
+                        $item = $data["nsx"][$i];
                         echo '                           
                              <tr>
-                                <td>NSX0'.$data["nsx"][$i]["id"].'</td>
-                                <td>'.$data["nsx"][$i]["tenNSX"].'</td>
-                                <td><a href="http://localhost/nguyencongpc/NSX/ShowById/'.$data["nsx"][$i]["id"].'">Sửa</a>&nbsp;<a href="http://localhost/nguyencongpc/NSX/DeleteById/'.$data["nsx"][$i]["id"].'">Xóa</a></td>                        
+                                <td>NSX0'.$item->id.'</td>
+                                <td>'.$item->tenNSX.'</td>
+                                <td><a href="http://localhost/nguyencongpc/NSX/ShowById/'.$item->id.'">Sửa</a>&nbsp;<a href="http://localhost/nguyencongpc/NSX/DeleteById/'.$item->id.'">Xóa</a></td>                        
                             </tr>
                         ';
                     }

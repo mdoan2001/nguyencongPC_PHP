@@ -2,24 +2,27 @@
 $gia = $sl = 0;
 $id= $ten = $anh = $cpu = $ram = $vga = $dl = $tl = $mau = "";
 
-if(isset($data["des"]["id"]) && isset($data["des"]["tenSanPham"]) && isset($data["des"]["gia"]) && isset($data["des"]["hinhAnh"]) &&
- isset($data["des"]["CPU"]) && isset($data["des"]["RAM"]) && isset($data["des"]["VGA"]) && isset($data["des"]["dungLuong"]) &&
- isset($data["des"]["trongLuong"]) && isset($data["des"]["mauSac"]) && isset($data["des"]["soLuong"])){
 
-    $id = $data["des"]["id"];
-    $ten = $data["des"]["tenSanPham"];
-    $gia = $data["des"]["gia"];
-    $anh = $data["des"]["hinhAnh"];
-    $cpu = $data["des"]["CPU"];
-    $ram = $data["des"]["RAM"];
-    $vga = $data["des"]["VGA"];
-    $dl = $data["des"]["dungLuong"];
-    $tl = $data["des"]["trongLuong"];
-    $mau = $data["des"]["mauSac"];
-    $sl = $data["des"]["soLuong"];
+if(isset($data["des"]->id) && isset($data["des"]->tenSanPham) && isset($data["des"]->gia) && isset($data["des"]->hinhAnh) &&
+ isset($data["des"]->CPU) && isset($data["des"]->RAM) && isset($data["des"]->VGA) && isset($data["des"]->dungLuong) &&
+ isset($data["des"]->trongLuong) && isset($data["des"]->mauSac) && isset($data["des"]->soLuong)){
+
+    $id = $data["des"]->id;
+    $ten = $data["des"]->tenSanPham;
+    $gia = $data["des"]->gia;
+    $anh = $data["des"]->hinhAnh;
+    $cpu = $data["des"]->CPU;
+    $ram = $data["des"]->RAM;
+    $vga = $data["des"]->VGA;
+    $dl = $data["des"]->dungLuong;
+    $tl = $data["des"]->trongLuong;
+    $mau = $data["des"]->mauSac;
+    $sl = $data["des"]->soLuong;
+
  }
 
 ?>
+
 
 
 <form action="http://localhost/nguyencongpc/SanPham/UpdatebyId" method="POST" class="product">
@@ -40,10 +43,10 @@ if(isset($data["des"]["id"]) && isset($data["des"]["tenSanPham"]) && isset($data
                 <label for="" class="product-label">Hãng sản xuất</label>
                 <select name="nsx" id="">
                     <?php
-                    $idNSXofSP = $data["des"]["maNSX"];
+                    $idNSXofSP = $data["des"]->maNSX;
                     for($i=0; $i<count($data["nsx"]); $i++){
-                        $idNSX = $data["nsx"][$i]["id"];
-                        $tenNSX = $data["nsx"][$i]["tenNSX"];
+                        $idNSX = $data["nsx"][$i]->id;
+                        $tenNSX = $data["nsx"][$i]->tenNSX;
                         if($idNSXofSP == $idNSX){
                             echo '<option selected value="'.$idNSX.'">'.$idNSX.' - '.$tenNSX.'</option>';
                         }
@@ -100,7 +103,7 @@ if(isset($data["des"]["id"]) && isset($data["des"]["tenSanPham"]) && isset($data
             <input type="submit" value="Cập nhật" name="submit" class="btn-submit">
         </div>
         <div class="content-right">
-            <img src="<?php echo $data["des"]["hinhAnh"]?>" alt="hinh anh" class="product-img">
+            <img src="<?php echo $anh?>" alt="hinh anh" class="product-img">
         </div>
     </div>
 </form>

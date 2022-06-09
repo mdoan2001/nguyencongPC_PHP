@@ -17,8 +17,9 @@
                 <select name="nsx" id="">
                     <?php
                     for($i=0; $i<count($data["nsx"]); $i++){
-                        $idNSX = $data["nsx"][$i]["id"];
-                        $tenNSX = $data["nsx"][$i]["tenNSX"];                      
+                        $item = $data["nsx"][$i];
+                        $idNSX = $item->id;
+                        $tenNSX = $item->tenNSX;                      
                         echo '<option value="'.$idNSX.'">'.$idNSX.' - '.$tenNSX.'</option>';                       
                     }
 
