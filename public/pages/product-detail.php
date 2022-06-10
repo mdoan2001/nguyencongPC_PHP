@@ -75,7 +75,19 @@ $item = $data["array"];
             <div class="content__main-mid">
                 <div class="content__main-inf">
                     <h3 class="content__main-inf-item content__main-inf-item--after">
-                        Tình trạng: <span class="content__main-inf-span content__main-inf-span--green">Còn hàng</span>
+                        <?php 
+                            if($data["slKho"]>0){
+                                echo '
+                                    Tình trạng: <span class="content__main-inf-span content__main-inf-span--green">Còn hàng</span>
+                                    ';
+                            }
+                            else{
+                                echo '
+                                    Tình trạng: <span class="content__main-inf-span content__main-inf-span--red">Hết hàng</span>
+                                ';
+                            }
+                        ?>
+                        <!-- Tình trạng: <span class="content__main-inf-span content__main-inf-span--green">Còn hàng</span> -->
                     </h3>
                     <h3 class="content__main-inf-item">
                         Bảo hành: <span class="content__main-inf-span content__main-inf-span--red">12 Tháng</span>
@@ -107,10 +119,17 @@ $item = $data["array"];
                     <p class="content__main-offer-text">+ Giảm 5% khi mua kèm Gear, Đế tản nhiệt Laptop</p>
                 </div>
                 <div class="content__main-buy">
-                    <a href="http://localhost/nguyencongpc/GioHang/themGioHang/<?php echo $item->id?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
-                        <h1>ĐẶT MUA NGAY</h1>
-                        <p>Giao hàng tận nơi nhanh chóng</p>
-                    </a>
+                    <?php if($data["slKho"]>0){?>
+                        <a href="http://localhost/nguyencongpc/GioHang/themGioHang/<?php echo $item->id?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
+                            <h1>THÊM VÀO GIỎ HÀNG</h1>
+                            <p>Giao hàng tận nơi nhanh chóng</p>
+                        </a>
+                    <?php }else {?>
+                        <a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham2/<?php echo $item->id?>/<?php echo "HetHang" ?>" class="content__main-buy-btn content__main-buy-btn--100 content__main-buy-btn--red">
+                            <h1>THÊM VÀO GIỎ HÀNG</h1>
+                            <p>Giao hàng tận nơi nhanh chóng</p>
+                        </a>                  
+                    <?php }?>
                     <button class="content__main-buy-btn content__main-buy-btn--50 content__main-buy-btn--blue" onclick="showInfoToast();">
                         <h1>TRẢ GÓP QUA HỒ SƠ</h1>
                         <p>Chỉ từ 1.915.000đ/tháng</p>

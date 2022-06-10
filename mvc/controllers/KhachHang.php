@@ -4,15 +4,21 @@ class KhachHang extends Controller{
     private $nsxModel, $UsersModel;
     private $nsx = array();
     private $soLuongSanPham;
-    private $soLuongDonhang;
+    private $soLuongDonHang;
     private $loaiTaiKhoan;
 
     function __construct()
     {
+        if(!isset($_SESSION["isLogin"])){
+            $_SESSION["isLogin"] = 0;
+        }
+
         // NSX
         $this->nsxModel = $this->model("NSXModel");
         $this->nsx = json_decode($this->nsxModel->GetList());
         $this->UsersModel = $this->model("UsersModel");
+
+        
         
 
         if(!empty($_SESSION["email"])){
@@ -54,8 +60,7 @@ class KhachHang extends Controller{
         }
         else{
             header('Location: http://localhost/nguyencongpc/Home');  
-        }
-            
+        }          
     }
     
 
@@ -89,7 +94,6 @@ class KhachHang extends Controller{
         }
     }
     public function Insert(){
-        if($_SESSION["isLogin"] == 1){
             if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
             && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
                 $hoTen = $_POST["hoTen"];
@@ -99,36 +103,21 @@ class KhachHang extends Controller{
                 $diaChi = $_POST["diaChi"];
                 $SDT = $_POST["SDT"];
 
-                $check = $this->UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-                if($check == true){
-                    echo "alert('Thêm thành công')";
-                }
-                else{
-                    echo "alert('Thêm thất bại')";
-                }
-
+                $this->UsersModel->Insert($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
 
                 if($this->loaiTaiKhoan == 0 ){
                     header('Location: http://localhost/nguyencongpc/KhachHang');
                 }
                 else{
-                    header('Location: http://localhost/nguyencongpc/Home');
+                    header('Location: http://localhost/nguyencongpc/Home/Show2/DangKyThanhCong');
                 }
                 
-            }
-        }
-        
-        if($this->loaiTaiKhoan == 0 ){
-            header('Location: http://localhost/nguyencongpc/KhachHang');
-        }
-        else{
-            header('Location: http://localhost/nguyencongpc/Home');
-        }
+            } 
     }
     public function UpdateByEmail(){
         if($_SESSION["isLogin"] == 1){
                 if(isset($_POST["hoTen"]) && isset($_POST["email"]) && isset($_POST["matKhau"])
-            && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
+                 && isset($_POST["loaiTaiKhoan"]) && isset($_POST["diaChi"]) && isset($_POST["SDT"])){
                 $hoTen = $_POST["hoTen"];
                 $email = $_POST["email"];
                 $matKhau = $_POST["matKhau"];
@@ -136,13 +125,7 @@ class KhachHang extends Controller{
                 $diaChi = $_POST["diaChi"];
                 $SDT = $_POST["SDT"];
 
-                $check = $this->UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
-                if($check == true){
-                    echo "alert('Sửa thành công')";
-                }
-                else{
-                    echo "alert('Sửa thất bại')";
-                }
+                $this->UsersModel->UpdateByEmail($email, $hoTen, $matKhau, $loaiTaiKhoan, $diaChi, $SDT);
 
                 header('Location: http://localhost/nguyencongpc/KhachHang');
                 
@@ -155,6 +138,10 @@ class KhachHang extends Controller{
             header('Location: http://localhost/nguyencongpc/Home');
 
         }
+
+
+       
+
     }
     public function DeleteByEmail($id){
         if($_SESSION["isLogin"] == 1){
@@ -228,7 +215,7 @@ class KhachHang extends Controller{
                 $_SESSION["loaiTaiKhoan"] = $user->loaiTaiKhoan;
                 $_SESSION["email"] = $user->email;
                 $_SESSION["hoTen"] = $user->hoTen;
-                header('Location: http://localhost/nguyencongpc/Home');   
+                header('Location: http://localhost/nguyencongpc/Home/Show2/DangNhapThanhCong');   
        
            }
            else{
@@ -239,10 +226,25 @@ class KhachHang extends Controller{
            }          
 
         }
-   }
+    }
 
-    
+    public function ThongTinCaNhan(){
 
+        if($_SESSION["isLogin"] == 1){
+            $this->view("user", "Layout", [
+                "page"=>"user",
+                "nsx"=>$this->nsx,
+                "title"=>"Đăng ký tài khoản thành viên",
+                "SLSP"=>$this->soLuongSanPham,
+                "SLDH"=>$this->soLuongDonHang,
+                "user"=>json_decode($this->model("UsersModel")->GetUserByEmail($_SESSION["email"]))
+            ]);
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/Home');                        
+        }
 
+        
+    }
 }
 ?>

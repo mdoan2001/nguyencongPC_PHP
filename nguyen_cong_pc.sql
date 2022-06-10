@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2022 at 08:37 AM
+-- Generation Time: Jun 10, 2022 at 03:15 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -40,10 +40,8 @@ CREATE TABLE `chitietdonhang` (
 --
 
 INSERT INTO `chitietdonhang` (`id`, `maDonHang`, `maSanPham`, `soLuong`, `tongTien`) VALUES
-(37, 19, 2, 1, 12000000),
-(38, 19, 4, 2, 111980000),
-(39, 20, 4, 1, 55990000),
-(40, 21, 30, 1, 13990000);
+(40, 21, 30, 1, 13990000),
+(52, 31, 58, 1, 5000000);
 
 -- --------------------------------------------------------
 
@@ -116,8 +114,7 @@ INSERT INTO `chitietsanpham` (`id`, `CPU`, `VGA`, `RAM`, `dungLuong`, `trongLuon
 (51, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel GHU', '8GB DDR4 3200MHz', '256GB', '2Kg', 'Đen'),
 (52, 'Intel Core i5-8250U (4 x 1.6GHz/6MB cache)', 'Intel UHD 620', '8GB DDR4', '256GB SSD (thêm 01 khe cắm SSD )', '1.5Kg', 'Bạc'),
 (53, 'Intel® Core™ i5-8250U', 'Intel® UHD Graphics 620', '8GB DDR4 2400MHz', '512GB SSD M.2', '1.52Kg', 'Xám'),
-(54, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel Graphics Technology', '8GB DDR4 3200MHz', 'M.2 2280NVMe SSD', '2Kg', 'Xám'),
-(55, 'Intel® Core™ i5-8250U', 'Intel® UHD Graphics 620', '8GB DDR4 2400MHz', '256GB SSD M.2', '1.2kg', 'Trắng');
+(54, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel Graphics Technology', '8GB DDR4 3200MHz', 'M.2 2280NVMe SSD', '2Kg', 'Xám');
 
 -- --------------------------------------------------------
 
@@ -140,9 +137,9 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`id`, `email`, `ngayMua`, `hoTen`, `SDT`, `diaChi`, `ghiChu`) VALUES
-(19, 'mdoan2001@gmail.com', '2022-06-05', 'Nguyễn Minh Đoàn', '0962662287', 'Văn Giang - Hưng Yên', ''),
-(20, 'mdoan2001@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', ''),
-(21, 'duc@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', 'Giao hàng ban trưa');
+(21, 'duc@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', 'Giao hàng ban trưa'),
+(28, 'mdoan2001@gmail.com', '2022-06-10', 'Nguyễn Minh Đoàn', '0962662287', '123', '123'),
+(31, 'mdoan2001@gmail.com', '2022-06-10', 'abc', 'abc', 'abc', 'abc');
 
 -- --------------------------------------------------------
 
@@ -161,10 +158,7 @@ CREATE TABLE `giohang` (
 --
 
 INSERT INTO `giohang` (`email`, `maSanPham`, `soLuong`) VALUES
-('duc@gmail.com', 30, 1),
-('mdoan2001@gmail.com', 4, 1),
-('thuy@gmail.com', 5, 2),
-('thuy@gmail.com', 25, 1);
+('duc@gmail.com', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -256,8 +250,7 @@ INSERT INTO `khohang` (`id`, `soLuong`) VALUES
 (51, 11),
 (52, 21),
 (53, 5),
-(54, 15),
-(55, 4);
+(54, 15);
 
 -- --------------------------------------------------------
 
@@ -280,10 +273,11 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`id`, `hoTen`, `email`, `diaChi`, `SDT`, `hinhAnh`, `gioiTinh`) VALUES
-(1, 'Nguyễn Bích Ngọc', 'ngoc@gmail.com', 'Thanh Xuân - Hà Nội', '1234567890', 'https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/26/ngo-ngang-voi-ve-dep-cua-hot-girl-anh-the-chua-tron-18-docx-1622043349706.jpeg', 1),
+(1, 'Nguyễn Bích Ngọc', 'ngoc@gmail.com', 'Thanh Xuân - Hà Nội', '0962662287', 'https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/26/ngo-ngang-voi-ve-dep-cua-hot-girl-anh-the-chua-tron-18-docx-1622043349706.jpeg', 1),
 (2, 'Trần Hoàng Anh', 'anh@gmail.com', 'Cầu Giấy - Hà Nội', '1234567981', 'https://image.vtc.vn/resize/th/upload/2021/04/07/ek6qycqxiaiyiun-11052098.jpg', 1),
 (3, 'Nguyễn Hoàng Đức', 'duc@gmail.com', 'Ba Đình - Hà Nội', '1237618738', 'https://toigingiuvedep.vn/wp-content/uploads/2021/07/mau-anh-the-dep-lam-the-can-cuoc.jpg', 0),
-(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0);
+(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0),
+(8, 'Nguyễn Hồng Hà', 'ha@gmail.com', 'Nha Trang - Khánh Hòa', '0898984743', 'https://image.vtc.vn/resize/th/upload/2021/04/07/iky-11052167.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -355,7 +349,7 @@ INSERT INTO `sanpham` (`id`, `tenSanPham`, `maNSX`, `hinhAnh`, `gia`) VALUES
 (52, 'Laptop LG Gram 14Z980-G AH52A5', 9, 'https://nguyencongpc.vn/media/product/8858-laptop-lg-gram-14z980-g-ah52a5-900x.jpg', 29190000),
 (53, 'Laptop LG Gram 15Z980-G AH55A5', 9, 'https://nguyencongpc.vn/media/product/8866-laptop-lg-gram-15z980-g-ah55a5-900x.jpg', 36200000),
 (54, 'Laptop LG gram 14ZD90N-V.AX55A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-512GB)', 9, 'https://nguyencongpc.vn/media/product/16751-laptop-lg-gram-14zd90n-v_ax55a5.jpg', 29000000),
-(55, 'Laptop LG Gram 14ZD980-G AX52A5', 9, 'https://nguyencongpc.vn/media/product/8846-laptop-lg-gram-14zd980-g-ax52a5-900x.jpg', 26490000);
+(58, 'VGA GALAX GeForce GTX 1660 SUPER 1-CLICK OC', 9, 'https://nguyencongpc.vn/media/product/16093-galax-1660-super-2.jpg', 5000000);
 
 -- --------------------------------------------------------
 
@@ -379,7 +373,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`email`, `hoTen`, `matKhau`, `loaiTaiKhoan`, `diaChi`, `SDT`) VALUES
 ('admin@gmail.com', 'ADMIN', '$2y$10$15bxKG4Qimh7SaZRBO88ke9EM8jCOXOoor4OmMcdXkCYVvI/yWEiO', 0, 'Hà Nội', '113'),
 ('duc@gmail.com', 'Nguyễn Anh Đức', '$2y$10$vO7vVXR6fk8S50Cz2K4YKOy7K0UgV7JjTPt4tp396IvwTPNQ0AiVW', 1, 'Bắc Từ Liêm - Hà Nội', '113114115'),
-('mdoan2001@gmail.com', 'Nguyễn Minh Đoàn', '$2y$10$uKKRndnuz7Qmb4dAFEN8oOsVIxnl7NWpB1VNFtF6UJJ7BR4SioNka', 1, 'Văn Giang - Hưng Yên', '0962662287'),
+('mdoan2001@gmail.com', 'Nguyễn Minh Đoàn', '$2y$10$BC9m8Z/PSFAhj5OpbP/x2uhvE6hoNJS8qq50U3fxHzMCOsaiBJZOW', 1, 'Văn Giang - Hưng Yên - VN', '0962662287'),
 ('thuy@gmail.com', 'Thanh Thuỳ', '$2y$10$mLBqLGFnoX/23fTsUQbpXexJc0.GmabRELChSbdEyhXMNozfyzaLK', 1, 'Hưng Yên', '123456789');
 
 --
@@ -453,43 +447,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `hangsanxuat`
 --
 ALTER TABLE `hangsanxuat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `khohang`
 --
 ALTER TABLE `khohang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

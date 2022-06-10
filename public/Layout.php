@@ -23,7 +23,7 @@
     
 </head>
 
-<body>
+<body onload="<?php echo isset($data["function"])?$data["function"]:null?>();">
     <div id="toast"></div>
     <div id="main">
 
@@ -80,7 +80,7 @@
                                         <a href="registration.html" class="header__top-account-link header__top-account-link--uppercase">HI '.$_SESSION["hoTen"].'</a>
                                         <ul class="header__top-account-list">
                                             <li class="header__top-account-item">
-                                                <a href="#" class="header__top-account-item-link">Cá nhân</a>
+                                                <a href="http://localhost/nguyencongpc/KhachHang/ThongTinCaNhan" class="header__top-account-item-link">Cá nhân</a>
                                             </li>
                                             <li class="header__top-account-item">
                                                 <a href="http://localhost/nguyencongpc/KhachHang/logout" class="header__top-account-item-link">Đăng suất</a>
@@ -114,12 +114,17 @@
                             <img src="./public/assets/img/logo.png" alt="" class="header__main-img">
                         </a>
                         <div class="header__main-search">
-                            <div class="header__main-search-group">
-                                <input class="header__main-search-input" type="text" placeholder="Nhập tên sản phẩm, từ khóa cần tìm...">
-                                <div class="header__main-search-icon">
+                            <form id="form-search" action="http://localhost/nguyencongpc/SanPham/SearchByName" method="POST" class="header__main-search-group">
+                                <input name="name" class="header__main-search-input" type="text" placeholder="Nhập tên sản phẩm, từ khóa cần tìm...">
+                                <div class="header__main-search-icon" id="btn-search">
                                     <i class=" fa-solid fa-magnifying-glass"></i>
                                 </div>
-                            </div>
+                                <script>
+                                    document.getElementById("btn-search").onclick = function(e){
+                                        document.getElementById("form-search").submit();
+                                    }
+                                </script>
+                            </form>
                             <div class="header__main-search-tag">
                                 <a class="header__main-search-tag-item">
                                     PC Gaming
@@ -180,7 +185,6 @@
                                     <?php
                                         for($i=0; $i<count($data["nsx"]); $i++){
                                             $item = $data["nsx"][$i];
-                                            echo $item->id . " - " . $item->tenNSX . "<br />";
                                             echo '
                                                 <li class="navbar__item">
                                                     <a href="http://localhost/nguyencongpc/SanPham/ShowByNSX/'.$item->id.'" class="navbar__link">
@@ -764,17 +768,63 @@
 <script src="./public/assets/js/model.js"></script>
 <script src="./public/assets/js/scroll.js"></script>
 <script src="./public/assets/js/navbar.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="./public/assets/js/slider.js"></script>
 <script>
-    function showSuccessToast() {
+    function DangNhapThanhCong() {
         toast({
             title: "Thành công!",
-            message: "Bạn đã đăng ký thành công tài khoản tại F8.",
+            message: "Bạn đã đăng nhập thành công!",
             type: "success",
-            duration: 5000
+            duration: 4000
+        });
+    }
+
+    function DangKyThanhCong() {
+        toast({
+            title: "Thành công!",
+            message: "Bạn đã đăng ký TK thành công!",
+            type: "success",
+            duration: 4000
+        });
+    }
+
+    function DatHangThanhCong() {
+        toast({
+            title: "Thành công!",
+            message: "Bạn đã đặt hàng thành công!",
+            type: "success",
+            duration: 4000
+        });
+    }
+
+    function ThemGioHang() {
+        toast({
+            title: "Thành công!",
+            message: "Đã thêm vào giỏ hàng!",
+            type: "success",
+            duration: 4000
+        });
+    }
+
+    function ChuaDangNhap() {
+        toast({
+            title: "Lưu ý!",
+            message: "Bạn cần phải đăng nhập!",
+            type: "error",
+            duration: 2000
+        });
+    }
+    
+    function HetHang() {
+        toast({
+            title: "Lưu ý!",
+            message: "Hết hàng. Không thể thêm vào giỏ!",
+            type: "error",
+            duration: 2000
         });
     }
 

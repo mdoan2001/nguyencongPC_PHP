@@ -64,7 +64,8 @@ class SanPham extends Controller{
 
     public function ChiTietSanPham($id){
 
-        $des = json_decode($this->ct->ChiTietSanPham($id));      
+        $des = json_decode($this->ct->ChiTietSanPham($id)); 
+        $soLuongTrongKho = $this->model("KhoHangModel")->GetSoLuong($id);     
 
         if($this->loaiTaiKhoan == 0){             
             $this->view("admin","Layout", [
@@ -80,15 +81,39 @@ class SanPham extends Controller{
                 "nsx"=>$this->nsx,
                 "title"=>"Chi tiết sản phẩm",
                 "SLSP"=>$this->soLuongSanPham,
-                "SLDH"=>$this->soLuongDonHang
+                "SLDH"=>$this->soLuongDonHang,
+                "slKho"=>$soLuongTrongKho
             ]);
         }
 
-
-
     }
 
-    
+    public function ChiTietSanPham2($id, $function){
+
+        $des = json_decode($this->ct->ChiTietSanPham($id)); 
+        $soLuongTrongKho = $this->model("KhoHangModel")->GetSoLuong($id);     
+
+        if($this->loaiTaiKhoan == 0){             
+            $this->view("admin","Layout", [
+                "page"=>"ChiTietSanPham",
+                "des"=>$des,
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+            $this->view("user","Layout", [
+                "page"=>"product-detail",
+                "array"=>$des,
+                "nsx"=>$this->nsx,
+                "title"=>"Chi tiết sản phẩm",
+                "SLSP"=>$this->soLuongSanPham,
+                "SLDH"=>$this->soLuongDonHang,
+                "slKho"=>$soLuongTrongKho,
+                "function"=>$function
+            ]);
+        }
+
+    }
 
     public function ShowByNSX($id){
 
@@ -112,6 +137,39 @@ class SanPham extends Controller{
                 "SLDH"=>$this->soLuongDonHang
             ]);
         }
+        
+    }
+
+    public function SearchByName(){
+        if(isset($_POST["name"])){
+            $name = $_POST["name"];
+
+            $arrsp = json_decode($this->sp->GetListByName($name));
+
+            if($this->loaiTaiKhoan == 0){             
+                
+                $this->view("admin", "Layout", [
+                    "page"=>"SanPham",
+                    "array"=>$arrsp,
+                    "nsx"=>$this->nsx
+                ]);
+            }
+            else{
+                $this->view("user", "Layout", [
+                    "page"=>"ListSanPham",
+                    "array"=>$arrsp,
+                    "nsx"=>$this->nsx,
+                    "title"=>"Danh sách sản phẩm",
+                    "SLSP"=>$this->soLuongSanPham,
+                    "SLDH"=>$this->soLuongDonHang
+                ]);
+            }
+        }
+        else{
+            header('Location: http://localhost/nguyencongpc/');  
+        }
+
+        
         
     }
 

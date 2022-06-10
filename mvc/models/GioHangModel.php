@@ -40,11 +40,19 @@ class GioHangModel extends DB{
         $result = mysqli_query($this->con, $qr);
         return mysqli_num_rows($result);
     }
+
     public function Delete($maSanPham){
         $qr = "DELETE FROM `giohang` WHERE `giohang`.`maSanPham` = $maSanPham";
         return mysqli_query($this->con, $qr);
 
     }
+    
+    public function DeleteByEmail($email){
+        $qr = "DELETE FROM `giohang` WHERE `giohang`.`email` = '$email'";
+        return mysqli_query($this->con, $qr);
+
+    }
+
     public function getSoLuongSanPham($email){
         $qr = "SELECT SUM(soLuong) AS 'soLuong' FROM giohang WHERE email = '$email'";
         $row =  mysqli_query($this->con, $qr);

@@ -7,6 +7,10 @@ class Home extends Controller{
     private $loaiTaiKhoan;
     public function __construct()
     {
+        if(!isset($_SESSION["isLogin"])){
+            $_SESSION["isLogin"] = 0;
+        }
+
         
         //Kiem tra dang nhap
         // if($_POST["login"]==false){
@@ -17,6 +21,8 @@ class Home extends Controller{
         $nsxModel = $this->model("NSXModel");
         $this->nsx = json_decode($nsxModel->GetList());
 
+        
+        
 
         if(!empty($_SESSION["email"])){
             //get loai tai khoan
@@ -70,14 +76,35 @@ class Home extends Controller{
             ]);
         }
 
-        // for($i=0; $i<count($this->nsx); $i++){
-        //     $item = $this->nsx[$i];
-        //     echo  $item->id . " - " . $item->tenNSX . '<br />';
-        // }
+    }
 
-        // echo '<pre>';
-        // print_r($arr);
-        // echo '</pre>';
+    public function Show2($function){
+        $spModel = $this->model("SanPhamModel");
+        $sp = json_decode($spModel->GetList());
+
+        $arr = array();
+        foreach($sp as $key=>$value){
+            $arr[$value->tenNSX][] = $sp[$key]; 
+        }
+
+        if($this->loaiTaiKhoan == 0){      
+            $this->view("admin","Layout", [
+                "page"=>"SanPham",
+                "array"=>$sp,
+                "nsx"=>$this->nsx
+            ]);            
+        }
+        else{
+            $this->view("user","Layout", [
+                "page"=>"Home",
+                "array"=>$arr,
+                "nsx"=>$this->nsx,
+                "title"=>"Máy tính Nguyễn Công",
+                "SLSP"=>$this->soLuongSanPham,
+                "SLDH"=>$this->soLuongDonHang,
+                "function"=>$function
+            ]);
+        }
 
     }
     

@@ -20,6 +20,19 @@ class SanPhamModel extends DB{
         }
         return json_encode($result);
     }
+
+    public function GetListByName($name){
+        $qr = "SELECT sanpham.id, tenSanPham, maNSX, tenNSX, hinhAnh, soLuong, gia FROM `sanpham` INNER JOIN `khohang` ON `sanpham`.id = `khohang`.id
+        INNER JOIN `hangsanxuat` ON `sanpham`.maNSX = `hangsanxuat`.id WHERE `sanpham`.`tenSanPham` LIKE '%$name%'";
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result,$item);
+        }
+        return json_encode($result);
+
+    }
+
     public function getLastId(){
         $qr = "SELECT `id` FROM `sanpham` ORDER BY `id` DESC LIMIT 1";
         $row =  mysqli_query($this->con, $qr);

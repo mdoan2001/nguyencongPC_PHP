@@ -41,7 +41,7 @@
                             <td>'.$item->tenNSX.'</td>
                             <td><img src="'.$item->hinhAnh.'" alt="" width="100px"></td>
                             <td>'.$item->soLuong.'</td>
-                            <td>'.$item->gia.'</td>
+                            <td>'.number_format($item->gia).'đ</td>
                             <td><a href="http://localhost/nguyencongpc/SanPham/ChiTietSanPham/'.$item->id.'">Sửa</a>&nbsp;<a href="http://localhost/nguyencongpc/SanPham/DeleteById/'.$item->id.'">Xóa</a></td>
                         </tr>
                         ';

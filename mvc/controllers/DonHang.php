@@ -9,12 +9,19 @@ class DonHang extends Controller{
     private $soLuongDonHang;
     private $loaiTaiKhoan;
     private $tongTien;
+    private $array = array();
     public function __construct()
     {
-        //Kiem tra dang nhap
-        if($_SESSION["isLogin"]== 0){
-            header('Location: http://localhost/nguyencongpc/');                                   
+        if(!isset($_SESSION["isLogin"])){
+            $_SESSION["isLogin"] = 0;
         }
+        //Kiem tra dang nhap
+        if($_SESSION["isLogin"] == 0){
+            header('Location: http://localhost/nguyencongpc/Home/Show2/ChuaDangNhap');                                                                     
+        }
+
+        
+        
 
         $this->cartModel = $this->model("GioHangModel");
         $this->orderModel = $this->model("DonHangModel");
@@ -49,11 +56,11 @@ class DonHang extends Controller{
             $this->loaiTaiKhoan = 1;
         }
 
-        $array = json_decode($this->cartModel->ShowbyEmail($_SESSION["email"]));
+        $this->array = json_decode($this->cartModel->ShowbyEmail($_SESSION["email"]));
         $this->tongTien =0;
 
-        for($i=0; $i<count($array); $i++){
-            $this->tongTien += $array[$i]->gia * $array[$i]->soLuong;
+        for($i=0; $i<count($this->array); $i++){
+            $this->tongTien += $this->array[$i]->gia * $this->array[$i]->soLuong;
         }
         
     }
@@ -86,10 +93,13 @@ class DonHang extends Controller{
                     $soLuong = $this->array[$i]->soLuong;
                     $gia = $this->array[$i]->gia;
                     $tien = $gia * $soLuong;
-    
+                    
+                    //giam số lượng trong kho
+                    $this->model("KhoHangModel")->UpdateSoLuong($maSanPham, $soLuong);
                     $chiTietDonHangModel->Insert($maDonHang, $maSanPham, $soLuong, $tien);
                 }   
-                header('Location: http://localhost/nguyencongpc/Donhang');              
+                $this->cartModel->DeleteByEmail($_SESSION["email"]);
+                header('Location: http://localhost/nguyencongpc/Donhang/Show2/DatHangThanhCong');              
             }  
             
         }
@@ -100,7 +110,8 @@ class DonHang extends Controller{
     }
 
     public function Show(){    
-        if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
+        
+        if($this->loaiTaiKhoan == 1){
             // Lấy ID đơn hàng
             $maDonHang = $this->orderModel->GetLastID();
             $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
@@ -126,12 +137,42 @@ class DonHang extends Controller{
         
         }
         else{
+            header('Location: http://localhost/nguyencongpc/');
+
+        }                          
+    }
+
+    public function Show2($function){    
+        if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
+            // Lấy ID đơn hàng
+            $maDonHang = $this->orderModel->GetLastID();
+            $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
+
+            $ctdh = $this->model("ChiTietDonHangModel");
+            $array1 = json_decode($ctdh->GetCTDHByMaDonHang($maDonHang));
+                 
+            // CART
+
+            if($this->loaiTaiKhoan == 1){
+                $this->view("user", "Layout",[
+                    "page"=>"order-detail",
+                    "nsx"=>$this->nsx,
+                    "SLSP"=>$this->soLuongSanPham,
+                    "SLDH"=>$this->soLuongDonHang,
+                    "tongTien"=>$this->tongTien,
+                    "title"=>"Chi tiết đơn hàng",
+                    "array"=>$array1,
+                    "content"=>$array,
+                    "lastID"=>$maDonHang,
+                    "function"=>$function
+                ]);
+            }
+        
+        }
+        else{
             header('Location: http://localhost/nguyencongpc/Donhang');
 
-        }
-
-        
-                    
+        }                          
     }
 
     public function ChiTietDonHang($maDonHang){    
@@ -187,11 +228,6 @@ class DonHang extends Controller{
         else{
             header('Location: http://localhost/nguyencongpc/Donhang');
         }
-
-
-
-
-
 
     }
 

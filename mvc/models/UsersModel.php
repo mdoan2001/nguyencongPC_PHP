@@ -44,6 +44,15 @@ class UsersModel extends DB{
         $result = mysqli_fetch_assoc($row);
         return $result["loaiTaiKhoan"];
     }
+    public function CheckEmail($email){
+        $qr = "SELECT * FROM users WHERE email = '$email'";
+        $row = mysqli_query($this->con, $qr);
+        $check = false;
+        if(mysqli_num_rows($row)>0){
+            $check = true;
+        }
+        return $check;
+    }
 }
 
 ?>

@@ -5,16 +5,22 @@ class GioHang extends Controller{
     private $nsx = array();
     private $cartModel;
     private $soLuongSanPham;
-    private $soLuongDonhang;
+    private $soLuongDonHang;
     private $loaiTaiKhoan;
 
     public function __construct()
     {
+        if(!isset($_SESSION["isLogin"])){
+            $_SESSION["isLogin"] = 0;
+        }
         
         //Kiem tra dang nhap
         if($_SESSION["isLogin"] == 0){
-            header('Location: http://localhost/nguyencongpc/');                                   
+            header('Location: http://localhost/nguyencongpc/Home/Show2/ChuaDangNhap');                                   
         }
+
+        
+        
 
         $this->cartModel = $this->model("GioHangModel");
         
@@ -77,9 +83,35 @@ class GioHang extends Controller{
             header('Location: http://localhost/nguyencongpc/GioHang');                        
 
         }   
+    }
+
+    public function Show2($function){
         
+        $array = json_decode($this->cartModel->ShowbyEmail($_SESSION["email"]));
+        
+        $tongTien =0;
+
+        for($i=0; $i<count($array); $i++){
+            $tongTien += $array[$i]->gia* $array[$i]->soLuong;
+        }
         
 
+        if($this->loaiTaiKhoan == 1){
+            $this->view("user", "Layout",[
+                "page"=>"cart",
+                "nsx"=>$this->nsx,
+                "array"=>$array,
+                "SLSP"=>$this->soLuongSanPham,
+                "SLDH"=>$this->soLuongDonHang,
+                "tongTien"=>$tongTien,
+                "title"=>"Thông tin giỏ hàng",
+                "function"=>$function
+            ]);  
+        }        
+        else{
+            header('Location: http://localhost/nguyencongpc/GioHang');                        
+
+        }   
     }
 
    
@@ -93,7 +125,7 @@ class GioHang extends Controller{
             $num2 = $this->cartModel->checkEmail($_SESSION["email"]);
             if(($num1 == 0 && $num2 == 0) || ($num1 == 0 && $num2 > 0)){
                 $this->cartModel->Insert($_SESSION["email"], $maSanPham, 1);
-                header('Location: http://localhost/nguyencongpc/GioHang');                        
+                header('Location: http://localhost/nguyencongpc/GioHang/Show2/ThemGioHang');                        
             }
             else{
                 $this->cartModel->tangSoLuong($_SESSION["email"],$maSanPham);
