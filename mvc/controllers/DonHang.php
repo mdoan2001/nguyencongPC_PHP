@@ -99,12 +99,12 @@ class DonHang extends Controller{
                     $chiTietDonHangModel->Insert($maDonHang, $maSanPham, $soLuong, $tien);
                 }   
                 $this->cartModel->DeleteByEmail($_SESSION["email"]);
-                header('Location: http://localhost/nguyencongpc/Donhang/Show2/DatHangThanhCong');              
+                header('Location: http://localhost/nguyencongpc/DonHang/Show2/DatHangThanhCong');              
             }  
             
         }
         else{
-            header('Location: http://localhost/nguyencongpc/Donhang');
+            header('Location: http://localhost/nguyencongpc/DonHang');
         }
     
     }
@@ -121,7 +121,6 @@ class DonHang extends Controller{
                  
             // CART
 
-            if($this->loaiTaiKhoan == 1){
                 $this->view("user", "Layout",[
                     "page"=>"order-detail",
                     "nsx"=>$this->nsx,
@@ -132,18 +131,20 @@ class DonHang extends Controller{
                     "array"=>$array1,
                     "content"=>$array,
                     "lastID"=>$maDonHang
-                ]);
-            }
-        
+                ]);                
         }
         else{
-            header('Location: http://localhost/nguyencongpc/');
+            $this->view("admin", "Layout", [
+                "page"=>"DonHang",
+                "nsx"=>$this->nsx,
+                "orders"=>json_decode($this->orderModel->GetList())
+            ]);
 
-        }                          
+        }                        
     }
 
     public function Show2($function){    
-        if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
+        if($this->loaiTaiKhoan == 1){
             // Lấy ID đơn hàng
             $maDonHang = $this->orderModel->GetLastID();
             $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
@@ -178,17 +179,16 @@ class DonHang extends Controller{
     public function ChiTietDonHang($maDonHang){    
         $maDonHang = is_numeric($maDonHang)?$maDonHang:1;
 
+        $ctdh = $this->model("ChiTietDonHangModel");
 
-        if($_SESSION["isLogin"] == 1 && $this->loaiTaiKhoan == 1){
+        if($this->loaiTaiKhoan == 1){
             
             $array = json_decode($this->orderModel->GetDonHangByID($maDonHang));
 
 
-            $ctdh = $this->model("ChiTietDonHangModel");
             $array1 = json_decode($ctdh->GetCTDHByMaDonHang($maDonHang));
             // CART
 
-            if($this->loaiTaiKhoan == 1){
                 $this->view("user", "Layout",[
                     "page"=>"order-detail",
                     "nsx"=>$this->nsx,
@@ -199,17 +199,17 @@ class DonHang extends Controller{
                     "array"=>$array1,
                     "content"=>$array,
                     "lastID"=>$maDonHang
-                ]);
-            }
-
+                ]);          
         }
         else{
-            header('Location: http://localhost/nguyencongpc/Donhang');
-        }
+            $this->view("admin", "Layout", [
+                "page"=>"ChiTietDonHang",
+                "nsx"=>$this->nsx,
+                "order"=>json_decode($this->orderModel->GetDonHangByID($maDonHang)),
+                "detail"=>json_decode($ctdh->GetCTDHByMaDonHang($maDonHang))
+            ]);
 
-
-        
-                    
+        }                   
     }
     public function ShowByEmail(){
 

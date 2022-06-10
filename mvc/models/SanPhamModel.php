@@ -10,6 +10,29 @@ class SanPhamModel extends DB{
         }
         return json_encode($result);
     }
+
+    public function GetListByCost1($min, $max){
+        $qr = "SELECT sanpham.id, tenSanPham, maNSX, tenNSX, hinhAnh, soLuong, gia FROM `sanpham` INNER JOIN `khohang` ON `sanpham`.id = `khohang`.id
+        INNER JOIN `hangsanxuat` ON `sanpham`.maNSX = `hangsanxuat`.id WHERE gia BETWEEN '$min' AND '$max'";
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result, $item);
+        }
+        return json_encode($result);
+    }
+
+    public function GetListByCost2($min){
+        $qr = "SELECT sanpham.id, tenSanPham, maNSX, tenNSX, hinhAnh, soLuong, gia FROM `sanpham` INNER JOIN `khohang` ON `sanpham`.id = `khohang`.id
+        INNER JOIN `hangsanxuat` ON `sanpham`.maNSX = `hangsanxuat`.id WHERE gia > '$min'";
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result, $item);
+        }
+        return json_encode($result);
+    }
+
     public function GetListByNSX($idNSX){
         $qr = "SELECT sanpham.id, tenSanPham, tenNSX, hinhAnh, soLuong, gia FROM `sanpham` INNER JOIN `khohang` ON `sanpham`.id = `khohang`.id
         INNER JOIN `hangsanxuat` ON `sanpham`.maNSX = `hangsanxuat`.id WHERE maNSX = $idNSX";

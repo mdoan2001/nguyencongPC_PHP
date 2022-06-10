@@ -1,6 +1,18 @@
 <?php
 
 class DonHangModel extends DB{
+    public function GetList(){
+        $qr = " SELECT donhang.id, email, ngayMua, hoTen, SDT, diaChi, ghiChu, SUM(tongTien) as 'tongTien'
+                FROM donhang INNER JOIN chitietdonhang
+                ON donhang.id = chitietdonhang.maDonHang
+                GROUP BY donhang.id";
+        $row =  mysqli_query($this->con, $qr);
+        $result = array();
+        while($item = mysqli_fetch_assoc($row)){
+            array_push($result, $item);
+        }
+        return json_encode($result);
+    }
 
     public function GetListByEmail($email){
         $qr = " SELECT donhang.id, email, ngayMua, hoTen, SDT, diaChi, ghiChu, SUM(tongTien) as 'tongTien'

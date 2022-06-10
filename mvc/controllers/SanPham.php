@@ -117,6 +117,10 @@ class SanPham extends Controller{
 
     public function ShowByNSX($id){
 
+        if(!is_numeric($id)){
+            $id = 1;
+        }
+
         $arrsp = json_decode($this->sp->GetListByNSX($id));
 
         if($this->loaiTaiKhoan == 0){             
@@ -274,6 +278,39 @@ class SanPham extends Controller{
             $this->sp->DeleteById($id);
         }
         header('Location: http://localhost/nguyencongpc/Home');
+    }
+
+    public function ShowByCost1($min, $max){
+        if($this->loaiTaiKhoan == 0){
+            $min *= 1000000;
+            $max *= 1000000;
+            $this->view("admin","Layout", [
+                "page"=>"SanPham",
+                "array"=>json_decode($this->sp->GetListByCost1($min, $max)),
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+             header('Location: http://localhost/nguyencongpc/Home');
+
+        }
+
+
+    }
+
+    public function ShowByCost2($min){
+        if($this->loaiTaiKhoan == 0){
+            $min *= 1000000;
+            $this->view("admin","Layout", [
+                "page"=>"SanPham",
+                "array"=>json_decode($this->sp->GetListByCost2($min)),
+                "nsx"=>$this->nsx
+            ]);
+        }
+        else{
+             header('Location: http://localhost/nguyencongpc/Home');
+
+        }
     }
     
 }

@@ -61,6 +61,10 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></i></div>
                             TÀI KHOẢN
                         </a>
+                        <a class="nav-link" href="http://localhost/nguyencongpc/DonHang">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-arrow-down"></i></i></div>
+                            ĐƠN HÀNG
+                        </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -105,22 +109,15 @@
                                 </a>
                                 <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="Layout.html">10 củ</a>
-                                        <a class="nav-link" href="Layout.html">20 củ</a>
-                                        <a class="nav-link" href="Layout.html">30 củ</a>
+                                        <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByCost1/0/10">0 - 10 triệu</a>
+                                        <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByCost1/10/20">10 - 20 triệu</a>
+                                        <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByCost1/20/30">20 - 30 triệu</a>
+                                        <a class="nav-link" href="http://localhost/nguyencongpc/SanPham/ShowByCost2/30">30 triệu trở lên</a>
                                     </nav>
                                 </div>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
+                        
                     </div>
                 </div>
             </nav>
