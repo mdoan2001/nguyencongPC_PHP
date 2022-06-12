@@ -517,7 +517,7 @@
                             <p class="model__item-content">
                                 Giờ làm việc: <span class="red">08:30 - 18:30</span>
                             </p>
-                            <div class="model-item-map" style="background-image: url(assets/img/showroom/showroom-map1.jpg);"></div>
+                            <div class="model-item-map" style="background-image: url(./public/assets/img/showroom/showroom-map1.jpg);"></div>
                         </div>
                     </div>
 
@@ -535,7 +535,7 @@
                             <p class="model__item-content">
                                 Giờ làm việc: <span class="red">08:30 - 18:30</span>
                             </p>
-                            <div class="model-item-map" style="background-image: url(assets/img/showroom/showroom-map2.jpg);"></div>
+                            <div class="model-item-map" style="background-image: url(./public/assets/img/showroom/showroom-map2.jpg);"></div>
                         </div>
 
                     </div>
@@ -554,7 +554,7 @@
                             <p class="model__item-content">
                                 Giờ làm việc: <span class="red">08:30 - 18:30</span>
                             </p>
-                            <div class="model-item-map" style="background-image: url(assets/img/showroom/showroom-map3.jpg);"></div>
+                            <div class="model-item-map" style="background-image: url(./public/assets/img/showroom/showroom-map3.jpg);"></div>
                         </div>
 
                     </div>
