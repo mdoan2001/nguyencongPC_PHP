@@ -187,6 +187,12 @@ class DonHang extends Controller{
 
 
             $array1 = json_decode($ctdh->GetCTDHByMaDonHang($maDonHang));
+
+            $tongTien = 0;
+            foreach($array1 as $key=>$value){
+                $tongTien += $value->tongTien;
+            }
+
             // CART
 
                 $this->view("user", "Layout",[
@@ -194,7 +200,7 @@ class DonHang extends Controller{
                     "nsx"=>$this->nsx,
                     "SLSP"=>$this->soLuongSanPham,
                     "SLDH"=>$this->soLuongDonHang,
-                    "tongTien"=>$this->tongTien,
+                    "tongTien"=>$tongTien,
                     "title"=>"Chi tiết đơn hàng",
                     "array"=>$array1,
                     "content"=>$array,

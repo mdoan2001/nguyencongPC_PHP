@@ -35,7 +35,7 @@ $item = $data["array"];
                     <span class="content__inf-span">5</span>
                 </div>
                 <div class="content__inf-item content__inf-item--after">
-                    Bình luận: <span class="content__inf-span">0</span>
+                    Bình luận: <span class="content__inf-span">99</span>
                 </div>
                 <div class="content__inf-item content__inf-item--after">
                     Lượt xem: <span class="content__inf-span">1626</span>

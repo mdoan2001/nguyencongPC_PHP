@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2022 at 03:15 PM
+-- Generation Time: Jun 15, 2022 at 07:32 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -41,7 +41,9 @@ CREATE TABLE `chitietdonhang` (
 
 INSERT INTO `chitietdonhang` (`id`, `maDonHang`, `maSanPham`, `soLuong`, `tongTien`) VALUES
 (40, 21, 30, 1, 13990000),
-(52, 31, 58, 1, 5000000);
+(52, 31, 58, 1, 5000000),
+(53, 32, 15, 1, 34990000),
+(54, 32, 25, 1, 19490000);
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,8 @@ INSERT INTO `chitietsanpham` (`id`, `CPU`, `VGA`, `RAM`, `dungLuong`, `trongLuon
 (51, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel GHU', '8GB DDR4 3200MHz', '256GB', '2Kg', 'Đen'),
 (52, 'Intel Core i5-8250U (4 x 1.6GHz/6MB cache)', 'Intel UHD 620', '8GB DDR4', '256GB SSD (thêm 01 khe cắm SSD )', '1.5Kg', 'Bạc'),
 (53, 'Intel® Core™ i5-8250U', 'Intel® UHD Graphics 620', '8GB DDR4 2400MHz', '512GB SSD M.2', '1.52Kg', 'Xám'),
-(54, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel Graphics Technology', '8GB DDR4 3200MHz', 'M.2 2280NVMe SSD', '2Kg', 'Xám');
+(54, 'i5-1035G7/1.20GHz/3.70GHz', 'Intel Graphics Technology', '8GB DDR4 3200MHz', 'M.2 2280NVMe SSD', '2Kg', 'Xám'),
+(59, 'Core i5 1035G1 1.0 Ghz up to 3.6Ghz-6Mb', 'Intel Iris Xe Graphics', '4Gb (DDR4 (On board 4GB +1 khe 4GB/ Hỗ trợ RAM tối đa 12Gb))', 'SSD 256GB M.2 PCIe. Hỗ trợ khe cắm HDD SATA', '2kg', 'Đen');
 
 -- --------------------------------------------------------
 
@@ -138,8 +141,8 @@ CREATE TABLE `donhang` (
 
 INSERT INTO `donhang` (`id`, `email`, `ngayMua`, `hoTen`, `SDT`, `diaChi`, `ghiChu`) VALUES
 (21, 'duc@gmail.com', '2022-06-05', 'Nguyễn Anh Đức', '123', 'Hà Nội', 'Giao hàng ban trưa'),
-(28, 'mdoan2001@gmail.com', '2022-06-10', 'Nguyễn Minh Đoàn', '0962662287', '123', '123'),
-(31, 'mdoan2001@gmail.com', '2022-06-10', 'abc', 'abc', 'abc', 'abc');
+(31, 'mdoan2001@gmail.com', '2022-06-10', 'abc', 'abc', 'abc', 'abc'),
+(32, 'mdoan2001@gmail.com', '2022-06-10', 'Nguyễn Minh Đoàn', '0962662287', 'Văn Giang - Hưng Yên', '123123');
 
 -- --------------------------------------------------------
 
@@ -158,7 +161,8 @@ CREATE TABLE `giohang` (
 --
 
 INSERT INTO `giohang` (`email`, `maSanPham`, `soLuong`) VALUES
-('duc@gmail.com', 30, 1);
+('duc@gmail.com', 30, 1),
+('mdoan2001@gmail.com', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -213,7 +217,7 @@ INSERT INTO `khohang` (`id`, `soLuong`) VALUES
 (12, 31),
 (13, 17),
 (14, 40),
-(15, 12),
+(15, 11),
 (16, 35),
 (17, 12),
 (20, 14),
@@ -221,7 +225,7 @@ INSERT INTO `khohang` (`id`, `soLuong`) VALUES
 (22, 10),
 (23, 2),
 (24, 7),
-(25, 4),
+(25, 3),
 (26, 6),
 (27, 5),
 (28, 11),
@@ -250,7 +254,8 @@ INSERT INTO `khohang` (`id`, `soLuong`) VALUES
 (51, 11),
 (52, 21),
 (53, 5),
-(54, 15);
+(54, 15),
+(59, 10);
 
 -- --------------------------------------------------------
 
@@ -276,8 +281,7 @@ INSERT INTO `nhanvien` (`id`, `hoTen`, `email`, `diaChi`, `SDT`, `hinhAnh`, `gio
 (1, 'Nguyễn Bích Ngọc', 'ngoc@gmail.com', 'Thanh Xuân - Hà Nội', '0962662287', 'https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/26/ngo-ngang-voi-ve-dep-cua-hot-girl-anh-the-chua-tron-18-docx-1622043349706.jpeg', 1),
 (2, 'Trần Hoàng Anh', 'anh@gmail.com', 'Cầu Giấy - Hà Nội', '1234567981', 'https://image.vtc.vn/resize/th/upload/2021/04/07/ek6qycqxiaiyiun-11052098.jpg', 1),
 (3, 'Nguyễn Hoàng Đức', 'duc@gmail.com', 'Ba Đình - Hà Nội', '1237618738', 'https://toigingiuvedep.vn/wp-content/uploads/2021/07/mau-anh-the-dep-lam-the-can-cuoc.jpg', 0),
-(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0),
-(8, 'Nguyễn Hồng Hà', 'ha@gmail.com', 'Nha Trang - Khánh Hòa', '0898984743', 'https://image.vtc.vn/resize/th/upload/2021/04/07/iky-11052167.jpeg', 1);
+(4, 'Nguyễn Anh Đức', 'anhduc1@gmail.com', 'Bắc Từ Liêm- Hà Nội', '898984743', 'https://upload.wikimedia.org/wikipedia/commons/1/10/%E1%BA%A2nh-th%E1%BA%BB-v%C6%B0%E1%BB%A3ng.png', 0);
 
 -- --------------------------------------------------------
 
@@ -349,7 +353,8 @@ INSERT INTO `sanpham` (`id`, `tenSanPham`, `maNSX`, `hinhAnh`, `gia`) VALUES
 (52, 'Laptop LG Gram 14Z980-G AH52A5', 9, 'https://nguyencongpc.vn/media/product/8858-laptop-lg-gram-14z980-g-ah52a5-900x.jpg', 29190000),
 (53, 'Laptop LG Gram 15Z980-G AH55A5', 9, 'https://nguyencongpc.vn/media/product/8866-laptop-lg-gram-15z980-g-ah55a5-900x.jpg', 36200000),
 (54, 'Laptop LG gram 14ZD90N-V.AX55A5 (14\"/FHD/i5-1035G7/RAM-8GB/SSD-512GB)', 9, 'https://nguyencongpc.vn/media/product/16751-laptop-lg-gram-14zd90n-v_ax55a5.jpg', 29000000),
-(58, 'VGA GALAX GeForce GTX 1660 SUPER 1-CLICK OC', 9, 'https://nguyencongpc.vn/media/product/16093-galax-1660-super-2.jpg', 5000000);
+(58, 'VGA GALAX GeForce GTX 1660 SUPER 1-CLICK OC', 9, 'https://nguyencongpc.vn/media/product/16093-galax-1660-super-2.jpg', 5000000),
+(59, 'Laptop Acer Aspire A315-56-58EG NX.HS5SV.00J (Core i5 1035G1/ 4Gb RAM / 256Gb SSD/ 15.6Inch Full HD - IPS/VGA ON/Win11/Black / 1 Yr)', 6, 'https://nguyencongpc.vn/media/product/22097-acer6.jpg', 6000000);
 
 -- --------------------------------------------------------
 
@@ -447,19 +452,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `chitietsanpham`
 --
 ALTER TABLE `chitietsanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `hangsanxuat`
@@ -471,7 +476,7 @@ ALTER TABLE `hangsanxuat`
 -- AUTO_INCREMENT for table `khohang`
 --
 ALTER TABLE `khohang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
@@ -483,7 +488,7 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Constraints for dumped tables
