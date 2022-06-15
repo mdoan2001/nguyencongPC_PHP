@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="http://localhost/nguyencongpc/">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,7 +10,6 @@
     <meta name="author" content="" />
     <title>ADMIN - NHÓM 1</title>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2304/2304226.png" type="image/x-icon" />
-    <base href="http://localhost/nguyencongpc/">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="./mvc/views/assets/css/styles.css" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
